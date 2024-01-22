@@ -2,6 +2,7 @@ using Behavior_Tree;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class zombie_1_behavior_tree : MonoBehaviour
@@ -12,9 +13,11 @@ public class zombie_1_behavior_tree : MonoBehaviour
     Chase chase_AI_Node;
     public float chaseRange = 5;
     public Transform player;
-    Vector3 direction;
+    Vector2 direction;
     public float speed = 3;
-
+    AStar2D navigation;
+    public AiGrid grid;
+    int pathIndex = 0;
     private bool WithinChaseRangeCheck()
     {
         if ((transform.position - player.position).magnitude < chaseRange)
@@ -31,6 +34,8 @@ public class zombie_1_behavior_tree : MonoBehaviour
     public void Start()
     {
 
+        navigation = new AStar2D(grid);
+
         idle_AI_Node = new Idle();
         chase_AI_Node = new Chase();
 
@@ -45,17 +50,19 @@ public class zombie_1_behavior_tree : MonoBehaviour
         root_AI_Node.SetData("withinChaseRange", WithinChaseRangeCheck());
         root_AI_Node.SetData("movementDirection", Vector2.zero);
         root_AI_Node.SetData("chasing", false);
+        root_AI_Node.SetData("resetPath", false);
+        root_AI_Node.SetData("cellExtent", grid.GetCellSize()*0.5f);
+
     }
 
     public void Update()
     {
 
         var withinRange = WithinChaseRangeCheck();
-        direction = -(transform.position - player.position).normalized;
-
+      
         root_AI_Node.SetData("withinChaseRange", withinRange);
-        if(withinRange)
-            root_AI_Node.SetData("movementDirection", direction);
+      
+           
 
         root_AI_Node.Evaluate();
 
@@ -63,7 +70,43 @@ public class zombie_1_behavior_tree : MonoBehaviour
         if((bool)root_AI_Node.GetData("chasing"))
         {
 
-            transform.position += (direction * speed*Time.deltaTime);
+            
+         
+            if(navigation.GetPathFound())
+            {
+                
+                var path = navigation.GetPath();
+
+                if (pathIndex >= path.Count || (bool)root_AI_Node.GetData("resetPath"))
+                {
+
+                    pathIndex = 0;
+                    navigation.ResetPath();
+
+                }
+                else
+                {
+                    Vector2 goal = path[pathIndex].pos;
+
+                    direction = -((Vector2)transform.position - goal).normalized;
+                    root_AI_Node.SetData("movementDirection", direction);
+
+                    transform.position += (Vector3)(direction * speed * Time.deltaTime);
+
+                    if (Vector2.Distance(transform.position, goal) <
+                        (float)root_AI_Node.GetData("cellExtent"))
+                    {
+                        pathIndex++;
+
+
+                    }
+
+                }
+            }
+            else
+            {
+                navigation.AStarSearch(transform.position, player.position);
+            }
         }
 
 
