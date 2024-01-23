@@ -7,7 +7,6 @@ public class Raycasting : MonoBehaviour
 
     //Creates a Raycast
     RaycastHit2D hit;
-    Vector3 mousePosition;
 
     void Start()
     {
@@ -17,10 +16,8 @@ public class Raycasting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        mousePosition = Input.mousePosition;
-        mousePosition.z = 0;
-        mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
-        hit = Physics2D.Raycast(transform.position, transform.up);
+        
+        hit = Physics2D.Raycast(transform.position, transform.up,60f);
         if (hit.collider)
         {
             Debug.Log(hit.collider);
