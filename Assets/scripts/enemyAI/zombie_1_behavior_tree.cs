@@ -5,18 +5,18 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class zombie_1_behavior_tree : MonoBehaviour
+public class zombie_1_behavior_tree : flock_agent
 {
     Root root_AI_Node;
     List<Node> children_AI_Nodes;
     Idle idle_AI_Node;
     Chase chase_AI_Node;
     public float chaseRange = 5;
-    public Transform player;
+   
     Vector2 direction;
     public float speed = 3;
     AStar2D navigation;
-    public AiGrid grid;
+   
     int pathIndex = 0;
     private bool WithinChaseRangeCheck()
     {
@@ -54,7 +54,7 @@ public class zombie_1_behavior_tree : MonoBehaviour
         root_AI_Node.SetData("cellExtent", grid.GetCellSize()*0.5f);
 
     }
-
+    
     public void Update()
     {
 
@@ -67,12 +67,13 @@ public class zombie_1_behavior_tree : MonoBehaviour
         root_AI_Node.Evaluate();
 
 
-        if((bool)root_AI_Node.GetData("chasing"))
+        if((bool)root_AI_Node.GetData("chasing")&&Flocked)
         {
+            transform.position += (Vector3)MoveVector * Time.deltaTime;
+           
 
-            
-         
-            if(navigation.GetPathFound())
+
+            if (navigation.GetPathFound())
             {
                 
                 var path = navigation.GetPath();
@@ -91,7 +92,7 @@ public class zombie_1_behavior_tree : MonoBehaviour
                     direction = -((Vector2)transform.position - goal).normalized;
                     root_AI_Node.SetData("movementDirection", direction);
 
-                    transform.position += (Vector3)(direction * speed * Time.deltaTime);
+                    transform.position +=((Vector3)(direction * speed)) * Time.deltaTime;
 
                     if (Vector2.Distance(transform.position, goal) <
                         (float)root_AI_Node.GetData("cellExtent"))
