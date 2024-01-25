@@ -22,8 +22,7 @@ public class Raycasting : MonoBehaviour
         {
             Debug.Log(hit.collider);
         }
-        //Debug.Log(mousePosition);
-
+        
     }
 
     private void OnDrawGizmos()

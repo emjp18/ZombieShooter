@@ -10,7 +10,8 @@ public class MovementAndCrosshair : MonoBehaviour
     private float legacySpeed;
     public Transform crosshair;
     public Camera playerCamera;
-    Vector3 direction;
+    Vector3 directionRotation;
+    Vector3 directionMove;
     float speed;
 
     // Start is called before the first frame update
@@ -18,23 +19,24 @@ public class MovementAndCrosshair : MonoBehaviour
     {
         controller = gameObject.GetComponent<CharacterController>();
         speed = 10f;
-        direction = Vector3.zero;
+        directionMove = Vector3.zero;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Rotating rectangle to mouse position
-        //Sets 
+        //Rotating rectangle to mouse position by
+        //setting a direction for the rotation based on
+        //transform and mouse position and then sets a crosshair to the positon of the mouse
         Vector3 mousePosition = Input.mousePosition;
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
-        direction = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y);
-        transform.up = direction;
+        directionRotation = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y);
+        transform.up = directionRotation;
         crosshair.position = new Vector3 (mousePosition.x,mousePosition.y,0);
 
-        //Move code
-        direction = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0).normalized;
-        transform.Translate(direction * speed * Time.deltaTime);
+        //Moves using a direction and speed
+        directionMove = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0).normalized;
+        transform.Translate(directionMove * speed * Time.deltaTime);
 
         //Camera
         playerCamera.transform.position = new Vector3(transform.position.x,transform.position.y,-10);
@@ -43,7 +45,7 @@ public class MovementAndCrosshair : MonoBehaviour
     //Old movement code i am not sure i wanna remove yet
     void LegacyMovement()
     {
-        //Move with wasd and arrow keys
+        //Move with wasd and arrow keys using the character controller
         Vector3 move = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0);
         move.Normalize();
         controller.Move(move * Time.deltaTime * legacySpeed);
