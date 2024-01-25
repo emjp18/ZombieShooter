@@ -2,18 +2,16 @@ using Behavior_Tree;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class flock_agent : MonoBehaviour 
+public class zombie_alone : MonoBehaviour
 {
-
     Root root_AI_Node;
     List<Node> children_AI_Nodes;
     Idle idle_AI_Node;
     Chase chase_AI_Node;
     public float chaseRange = 5;
+    Vector2 dir;
 
-    
     public float speed = 3;
     AStar2D navigation;
 
@@ -54,7 +52,7 @@ public class flock_agent : MonoBehaviour
     public Transform player;
     public AiGrid grid;
 
-    
+
     void Start()
     {
         agentCollider = GetComponent<CircleCollider2D>();
@@ -101,9 +99,8 @@ public class flock_agent : MonoBehaviour
         }
 
     }
-    public void EvaluateTree(ref Vector2 dir)
+    void Update()
     {
-
         var withinRange = WithinChaseRangeCheck();
 
         root_AI_Node.SetData("withinChaseRange", withinRange);
@@ -138,7 +135,7 @@ public class flock_agent : MonoBehaviour
                     dir = -((Vector2)transform.position - goal).normalized;
                     root_AI_Node.SetData("movementDirection", dir);
 
-                    
+                    transform.position += ((Vector3)(dir)) * speed * Time.deltaTime;
 
                     if (Vector2.Distance(transform.position, goal) <
                         (float)root_AI_Node.GetData("cellExtent"))
@@ -147,7 +144,7 @@ public class flock_agent : MonoBehaviour
 
 
                     }
-                    
+
                 }
             }
             else
@@ -155,9 +152,7 @@ public class flock_agent : MonoBehaviour
                 navigation.AStarSearch(transform.position, player.position);
             }
 
-           
-        }
-       
 
+        }
     }
 }

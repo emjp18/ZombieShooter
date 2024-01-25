@@ -32,6 +32,14 @@ public class AiGrid : MonoBehaviour
     [SerializeField] bool visualizeQuad = false;
 
     [SerializeField] bool visualizeAstar = false;
+
+
+    Vector2 upperLeftCorner;
+    Vector2 lowerRightCorner;
+
+    public Vector2 UpperLeft { get { return upperLeftCorner; } }
+    public Vector2 LowerRightCorner { get { return lowerRightCorner; } }
+
     public void Update()
     {
         if(visualizeAstar)
@@ -324,6 +332,13 @@ public class AiGrid : MonoBehaviour
                 AddNeighbors(customGrid[x, y]);
             }
         }
+
+        upperLeftCorner.x = gridCenter.x - (cellSize * rows * 0.25f);
+
+        upperLeftCorner.y = gridCenter.y + (cellSize * columns * 0.25f);
+
+        lowerRightCorner.x = gridCenter.x + (cellSize * rows * 0.25f);
+        lowerRightCorner.y = gridCenter.y - (cellSize * columns * 0.25f);
     }
 
     void AddNeighbors(A_STAR_NODE node)

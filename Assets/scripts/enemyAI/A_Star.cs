@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 
 public class AStar2D
@@ -224,6 +225,30 @@ public class AStar2D
         isFinding = false;
         return;
     }
+
+    //public bool FindObstacle(Vector2 goalPos, QUAD_NODE node)
+    //{
+    //    if (PointAABBIntersectionTest(node.bounds, goalPos))
+    //    {
+    //        if (node.leaf)
+    //        {
+    //            return customGrid[node.gridIndices[0].x, node.gridIndices[0].y].obstacle;
+                
+    //        }
+    //        else
+    //        {
+    //            for (int i = 0; i < 4; i++)
+    //            {
+    //                FindObstacle(goalPos, node.children[i]);
+    //            }
+    //            return false;
+    //        }
+    //    }
+    //    else
+    //        return false;
+
+    //}
+
     public void AStarSearch(Vector2 currentPos, Vector2 goalPos, int maximumNodes = 50)
     {
         if (!isFinding && !isSearching)
