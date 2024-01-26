@@ -15,6 +15,7 @@ public class CollisionMovement : MonoBehaviour
 
     private Vector2 faceDirection;
     private Vector2 moveDirection;
+    private Vector2 mousePosition;
 
     // Start is called before the first frame update
     void Start()
@@ -33,11 +34,12 @@ public class CollisionMovement : MonoBehaviour
     void Update()
     {
         // Rotating rectangle to mouse position
-        Vector3 mousePosition = Input.mousePosition;
+        //setting a direction for the rotation based on
+        //transform and mouse position and then sets a crosshair to the positon of the mouse
+        mousePosition = Input.mousePosition;
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
         faceDirection = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y);
         transform.up = faceDirection;
-        playerCrosshair.position = new Vector3(mousePosition.x, mousePosition.y, 0);
 
         // GetAxis() returns a value of -1, 0 or 1 depending on button clicked, Which button does what can be seen under "input manager" in project settings
         // Its normalized so that the speed will be consistent even if you are walking diagonaly
@@ -50,5 +52,8 @@ public class CollisionMovement : MonoBehaviour
     private void FixedUpdate()
     {
         rb.MovePosition(rb.position + moveDirection * currentSpeed * Time.fixedDeltaTime);
+        
+        //Sets crosshairs position to that of the mouse
+        playerCrosshair.position = new Vector3(mousePosition.x, mousePosition.y, 0);
     }
 }
