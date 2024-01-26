@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Raycasting : MonoBehaviour
+public class FOV_script : MonoBehaviour
 {
 
     //Creates a Raycast
