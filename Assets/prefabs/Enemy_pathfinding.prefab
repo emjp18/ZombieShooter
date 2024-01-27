@@ -1090,7 +1090,7 @@ GameObject:
   - component: {fileID: 2744155597564979024}
   - component: {fileID: 7268417459120782140}
   m_Layer: 6
-  m_Name: Zombie_Normal (default) 1 2
+  m_Name: Enemy_pathfinding
   m_TagString: zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1191,7 +1191,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chaseRange: 5
-  speed: 3
+  speed: 1
   align: 1
   avoid: 1
   cohesion: 1

@@ -1,0 +1,59 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Enemy_Flocks_Script : MonoBehaviour
+{
+    [SerializeField]
+    List<Transform> spawn_points = new List<Transform>();
+    List<Flock_Group_Script> groups = new List<Flock_Group_Script>();
+    [Range(0f, 10f)]
+    public float weightCohesion = 2.5f;
+    [Range(0f, 10f)]
+    public float weightAlignment = 2.5f;
+    [Range(0f, 10f)]
+    public float weightAvoidance = 2.5f;
+    [Range(0f, 10f)]
+    public float weightStayWithinRadius = 2.5f;
+    [Range(0f, 10f)]
+    public float speed = 3;
+    [Range(1f, 10f)]
+    public float chaseRange = 5;
+    float maxSpeed = 10;
+    public int layerCount =6;
+    public int agentCount = 5;
+    public Zombie_Flock_Prefab_Script agentPrefab;
+    public Transform player;
+    public float avoidanceThreshold = 5;
+    private void Start()
+    {
+        foreach (Transform t in spawn_points)
+        {
+            List<Zombie_Flock_Prefab_Script> agents = new List<Zombie_Flock_Prefab_Script>();
+            for (int i = 0; i < agentCount; i++)
+            {
+                agents.Add(Instantiate(agentPrefab,t.position,t.rotation));
+            }
+
+            groups.Add(new Flock_Group_Script(t, agentCount, chaseRange, weightCohesion, weightAvoidance, weightAlignment,
+                weightStayWithinRadius, speed, avoidanceThreshold, layerCount, maxSpeed, agents));
+
+           
+        }
+    }
+    private void Update()
+    {
+       for(int i=0;i<groups.Count; i++)
+        {
+           
+
+            groups[i].UpdateVariables(chaseRange, weightCohesion, weightAvoidance, weightAlignment,
+                   weightStayWithinRadius, speed, avoidanceThreshold);
+            groups[i].Update(player.position);
+
+         
+        }
+    }
+
+ 
+}

@@ -460,7 +460,7 @@ public static class Utility
         Vector2 avoidanceMove = Vector2.zero;
 
         temp.Clear();
-        float sum = 0;
+        //float sum = 0;
         int c = 0;
         foreach (Vector2 obstacle in staticObstacles[root.children[boxi].children[boxj].bounds])
         {
