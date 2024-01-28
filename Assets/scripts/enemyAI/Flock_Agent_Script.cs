@@ -11,14 +11,8 @@ public class Flock_Agent_Script : AI_Agent
 {
     Idle idle_AI_Node;
 
-    float chaseRange;
-    float weightCohesion;
-    float weightAvoidance;
-    float weightAlignment;
-    float weightStayWithinRadius;
-    float speed;
-    bool withinRange = false;
-    flock_behavior[] behaviours= new flock_behavior[4];
+   
+    flock_behavior[] behaviours= new flock_behavior[5];
    
     public flock_behavior[] Behaviors {  get { return behaviours; } }
     
@@ -29,19 +23,9 @@ public class Flock_Agent_Script : AI_Agent
         behaviours[0] = new Alignment();
         behaviours[1] = new Avoidance();
         behaviours[2] = new Cohesion();
-        behaviours[3] = new StayInRadiusBehavior();
+        behaviours[3] = new AvoidanceObstacle();
     }
-    public void UpdateVariables(float chaseRange, float weightCohesion, float weightAvoidance, float weightAlignment,
-        float weightStayWithinRadius, float speed)
-    {
-        this.chaseRange = chaseRange;
-        this.weightAlignment = weightAlignment;
-        this.weightAvoidance = weightAvoidance;
-        this.weightCohesion = weightCohesion;
-        this.weightStayWithinRadius = weightStayWithinRadius;
-        this.speed = speed;
-    }
-    
+  
 
     public override void Evaluate_Tree()
     {

@@ -226,28 +226,7 @@ public class AStar2D
         return;
     }
 
-    //public bool FindObstacle(Vector2 goalPos, QUAD_NODE node)
-    //{
-    //    if (PointAABBIntersectionTest(node.bounds, goalPos))
-    //    {
-    //        if (node.leaf)
-    //        {
-    //            return customGrid[node.gridIndices[0].x, node.gridIndices[0].y].obstacle;
-                
-    //        }
-    //        else
-    //        {
-    //            for (int i = 0; i < 4; i++)
-    //            {
-    //                FindObstacle(goalPos, node.children[i]);
-    //            }
-    //            return false;
-    //        }
-    //    }
-    //    else
-    //        return false;
-
-    //}
+   
 
     public void AStarSearch(Vector2 currentPos, Vector2 goalPos, int maximumNodes = 50)
     {
@@ -279,6 +258,29 @@ public class AStar2D
     public bool IsWithinGridBounds(Vector2 pos)
     {
         return PointAABBIntersectionTest(rootQuadNode.bounds, pos);
+    }
+    public bool FindObstacleFlocking(Vector2 pos, QUAD_NODE node, int maximumNodes)
+    {
+        if (PointAABBIntersectionTest(node.bounds, pos))
+        {
+            if (node.leaf)
+            {
+                return customGrid[node.gridIndices[0].x, node.gridIndices[0].y].obstacle;
+                
+            }
+            else
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    FindObstacleFlocking(pos, node.children[i], maximumNodes);
+                }
+                return false;
+            }
+        }
+        else
+        {
+            return false;
+        }
     }
     void GetAIGridIndex(Vector2 pos, QUAD_NODE node, int maximumNodes, bool isCurrentPos = true)
     {

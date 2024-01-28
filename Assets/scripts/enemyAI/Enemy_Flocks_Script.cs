@@ -13,8 +13,8 @@ public class Enemy_Flocks_Script : MonoBehaviour
     public float weightAlignment = 2.5f;
     [Range(0f, 10f)]
     public float weightAvoidance = 2.5f;
-    [Range(0f, 10f)]
-    public float weightStayWithinRadius = 2.5f;
+    //[Range(0f, 10f)]
+   float weightStayWithinRadius = 2.5f;
     [Range(0f, 10f)]
     public float speed = 3;
     [Range(1f, 10f)]
@@ -24,9 +24,15 @@ public class Enemy_Flocks_Script : MonoBehaviour
     public int agentCount = 5;
     public Zombie_Flock_Prefab_Script agentPrefab;
     public Transform player;
-    public float avoidanceThreshold = 5;
+    public float avoidanceThreshold = 1;
+    public float alignThreshold = 1;
+    public float cohesionThreshold = 1;
+    float gridcellsize;
+    public AiGrid grid;
+    AStar2D navigation;
     private void Start()
     {
+        gridcellsize = grid.GetCellSize();
         foreach (Transform t in spawn_points)
         {
             List<Zombie_Flock_Prefab_Script> agents = new List<Zombie_Flock_Prefab_Script>();
@@ -36,10 +42,12 @@ public class Enemy_Flocks_Script : MonoBehaviour
             }
 
             groups.Add(new Flock_Group_Script(t, agentCount, chaseRange, weightCohesion, weightAvoidance, weightAlignment,
-                weightStayWithinRadius, speed, avoidanceThreshold, layerCount, maxSpeed, agents));
+                weightStayWithinRadius, speed, avoidanceThreshold,alignThreshold,cohesionThreshold, layerCount, maxSpeed, agents, gridcellsize));
 
            
         }
+
+        navigation = new AStar2D(grid);
     }
     private void Update()
     {
@@ -48,8 +56,8 @@ public class Enemy_Flocks_Script : MonoBehaviour
            
 
             groups[i].UpdateVariables(chaseRange, weightCohesion, weightAvoidance, weightAlignment,
-                   weightStayWithinRadius, speed, avoidanceThreshold);
-            groups[i].Update(player.position);
+                   weightStayWithinRadius, speed, avoidanceThreshold,alignThreshold,cohesionThreshold);
+            groups[i].Update(player.position, navigation);
 
          
         }
