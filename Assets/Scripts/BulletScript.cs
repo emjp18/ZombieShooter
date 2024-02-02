@@ -16,7 +16,7 @@ public class BulletScript : MonoBehaviour
         direction = (crosshairTransform.position - transform.position).normalized;
 
         timerUntilDestoyed = 0.5f;
-        speed = 40;
+        speed = 100;
     }
 
     void Update()
