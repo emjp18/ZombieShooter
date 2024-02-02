@@ -248,6 +248,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: road
       objectReference: {fileID: 0}
+    - target: {fileID: 8304233392611979284, guid: 99d85be62a31f57418bb5074f1d53d37, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -429,6 +433,10 @@ PrefabInstance:
       value: Bullet
       objectReference: {fileID: 0}
     - target: {fileID: 6501395690196270628, guid: b9d80269b22b95e4a8299a79fa3ee818, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6501395690196270628, guid: b9d80269b22b95e4a8299a79fa3ee818, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -501,6 +509,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 453798937586245233, guid: 3fe6b302c53ed7f42bfa6aef9c9b061f, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 1837006272065136895, guid: 3fe6b302c53ed7f42bfa6aef9c9b061f, type: 3}
       propertyPath: camera
       value: 
@@ -509,6 +521,10 @@ PrefabInstance:
       propertyPath: bullet
       value: 
       objectReference: {fileID: 820458838}
+    - target: {fileID: 8413110894233679534, guid: 3fe6b302c53ed7f42bfa6aef9c9b061f, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8597160705842456757, guid: 3fe6b302c53ed7f42bfa6aef9c9b061f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.5636024
