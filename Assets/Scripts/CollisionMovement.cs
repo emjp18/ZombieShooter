@@ -7,7 +7,7 @@ using UnityEngine.Jobs;
 public class CollisionMovement : MonoBehaviour
 {
     public Transform playerCrosshair;
-    public Camera playerCamera;
+    public Camera camera;
 
     private Rigidbody2D rb;
 
@@ -46,7 +46,7 @@ public class CollisionMovement : MonoBehaviour
         moveDirection = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0).normalized;
 
         // Camera snap to player
-        playerCamera.transform.position = new Vector3(transform.position.x, transform.position.y, -10);
+        camera.transform.position = new Vector3(transform.position.x, transform.position.y, -10);
     }
 
     private void FixedUpdate()
