@@ -428,6 +428,14 @@ PrefabInstance:
       propertyPath: timerUntilDestoyed
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6100095204584823160, guid: b9d80269b22b95e4a8299a79fa3ee818, type: 3}
+      propertyPath: m_GravityScale
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6100095204584823160, guid: b9d80269b22b95e4a8299a79fa3ee818, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6501395690196270628, guid: b9d80269b22b95e4a8299a79fa3ee818, type: 3}
       propertyPath: m_Name
       value: Bullet

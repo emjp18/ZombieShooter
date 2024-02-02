@@ -16,7 +16,7 @@ public class BulletScript : MonoBehaviour
         direction = (crosshairTransform.position - transform.position).normalized;
 
         timerUntilDestoyed = 0.5f;
-        speed = 100;
+        speed = 80;
     }
 
     void Update()
@@ -25,6 +25,14 @@ public class BulletScript : MonoBehaviour
 
         timerUntilDestoyed -= Time.deltaTime;
         if (timerUntilDestoyed <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Blocking"))
         {
             Destroy(gameObject);
         }
