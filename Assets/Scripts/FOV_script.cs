@@ -29,6 +29,5 @@ public class FOV_script : MonoBehaviour
     {
         //Gizmos.DrawLine(transform.position, Vector2.right);
         Gizmos.color = Color.green;
-        
     }
 }
