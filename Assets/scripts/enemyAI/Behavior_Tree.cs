@@ -1,3 +1,4 @@
+using Behavior_Tree;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,20 @@ using UnityEngine;
  * This script contains the relevant information to make aa behavior tree. Protected within a namespace.
  * 
  */
+
+
+public abstract class AI_Agent
+{
+    protected Root root_AI_Node;
+    protected List<Node> children_AI_Nodes;
+    public abstract void Evaluate_Tree();
+
+    public abstract void Setup_Tree();
+}
+
+
+
+
 namespace Behavior_Tree
 {
     public enum NodeState
@@ -178,6 +193,38 @@ namespace Behavior_Tree
 
     }
 
-    
+    public class Idle : Node
+    {
+        public Idle() : base() { }
+        public override NodeState Evaluate()
+        {
+            if ((bool)GetData("withinChaseRange"))
+            {
+
+                return NodeState.FAILURE;
+            }
+            SetData("movementDirection", Vector2.zero);
+            SetData("chasing", false);
+
+            return NodeState.RUNNING;
+        }
+    }
+    public class Chase : Node
+    {
+        public Chase() : base() { }
+
+        public override NodeState Evaluate()
+        {
+            if (!(bool)GetData("withinChaseRange"))
+            {
+                return NodeState.FAILURE;
+            }
+
+            SetData("chasing", true);
+
+
+            return NodeState.RUNNING;
+        }
+    }
 
 }

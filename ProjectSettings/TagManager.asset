@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - zombie
+  - Blocking
   layers:
   - Default
   - TransparentFX

@@ -17,33 +17,12 @@ public class zombie_alone : MonoBehaviour
 
     int pathIndex = 0;
 
-    Cohesion behaviorCohesion = new Cohesion();
-    public Cohesion BehaviorCohesion { get { return behaviorCohesion; } }
-    Alignment behaviorAlign = new Alignment();
-    public Alignment BehaviorAlign { get { return behaviorAlign; } }
-
-    Avoidance behaviorAvoid = new Avoidance();
-    public Avoidance BehaviorAvoid { get { return behaviorAvoid; } }
-    bool flocked = false;
-
-    flock_behavior[] behaviours = new flock_behavior[3];
-
-    public flock_behavior[] Behaviours { get { return behaviours; } }
-
-    public bool Flocked
-    {
-        get { return flocked; }
-        set { flocked = value; }
-
-    }
     Vector2 moveVector;
     public Vector2 MoveVector { get { return moveVector; } set { moveVector = value; } }
     Collider2D agentCollider;
     public Collider2D AgentCollider { get { return agentCollider; } }
 
-    public bool align = true;
-    public bool avoid = true;
-    public bool cohesion = true;
+   
     bool[] behaviourOrderBooleans = new bool[3];
 
     public bool[] BehaviourOrderBooleans { get { return behaviourOrderBooleans; } }
@@ -55,15 +34,7 @@ public class zombie_alone : MonoBehaviour
 
     void Start()
     {
-        agentCollider = GetComponent<CircleCollider2D>();
-
-        behaviours[0] = behaviorAlign;
-        behaviours[1] = behaviorAvoid;
-        behaviours[2] = behaviorCohesion;
-
-        behaviourOrderBooleans[0] = align;
-        behaviourOrderBooleans[1] = avoid;
-        behaviourOrderBooleans[2] = cohesion;
+       
 
 
 
