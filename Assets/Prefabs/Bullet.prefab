@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5941362992792571930}
   - component: {fileID: 6100095204584823160}
   - component: {fileID: 316923623445682838}
+  - component: {fileID: -3997699649004254875}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: bullet
@@ -162,3 +163,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   crosshairTransform: {fileID: 0}
+--- !u!114 &-3997699649004254875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6501395690196270628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d6013874cc13814f8c0d1086f377228, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damagePerHit: 10
