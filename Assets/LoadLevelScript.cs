@@ -9,6 +9,9 @@ public class LoadLevelScript : MonoBehaviour
     public string StartScreen;
     public string SettingsScreen;
 
+    public int volumeLevel;
+    public bool fullScreen;
+
     void Start()
     {
 
