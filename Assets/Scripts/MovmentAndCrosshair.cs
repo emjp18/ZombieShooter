@@ -50,5 +50,4 @@ public class MovementAndCrosshair : MonoBehaviour
         move.Normalize();
         controller.Move(move * Time.deltaTime * legacySpeed);
     }
-
 }
