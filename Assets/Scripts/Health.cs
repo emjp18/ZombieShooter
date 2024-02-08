@@ -18,7 +18,7 @@ public class Health : MonoBehaviour
     }
 
     // Update is called once per frame
-    void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
         currentHealth -= damage;
         bar.SetHealth(currentHealth);
@@ -30,7 +30,7 @@ public class Health : MonoBehaviour
         }
     }
 
-    void Heal(int health)
+    public void Heal(int health)
     {
         currentHealth += health;
         bar.SetHealth(currentHealth);
@@ -42,13 +42,7 @@ public class Health : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            TakeDamage(20);
-        }
-    }
+    
 
 
 }
