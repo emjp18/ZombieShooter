@@ -25,7 +25,7 @@ public class Flock_Group_Script
     float AlignRadius;
     float CohesionRadius;
     List<Zombie_Flock_Prefab_Script> agents;
-   
+    int agentCount;
     public Transform Spawn {  get { return spawn; } }
 
     Vector2 forward;
@@ -54,7 +54,9 @@ public class Flock_Group_Script
         avoidRadius = avoidR;
         AlignRadius = alignR;
         CohesionRadius = cohesionr;
-     
+        this.agentCount = agentCount;
+
+
     }
     public void UpdateVariables(float chaseRange, float weightCohesion, float weightAvoidance, float weightAlignment,
         float weightStayWithinRadius, float speed, float avoidR, float alignR, float cohesionr)
@@ -75,9 +77,25 @@ public class Flock_Group_Script
 
         forward = Random.insideUnitCircle;// Vector2.zero;
 
+
+        for (int i=0; i<agentCount; i++)
+        {
+            if(i<agents.Count)
+            {
+                if (agents[i] == null)
+                {
+                    agents.Remove(agents[i]);
+                }
+            }
+            
+        }
+
         foreach (Zombie_Flock_Prefab_Script agent in agents)
         {
-            
+           
+                
+
+
             agent.PlayerPos = playerPos;
             agent.ChaseRange = chaseRange;
            
