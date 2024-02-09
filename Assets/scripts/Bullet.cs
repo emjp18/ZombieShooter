@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Bullet : MonoBehaviour
 {
@@ -13,9 +14,9 @@ public class Bullet : MonoBehaviour
     void Start()
     {
         //Normalizes the vector from the bullets position to the crosshairs position, to create a vector representing the direction the bullet should move
-        direction = (crosshairTransform.position - transform.position).normalized;
+        direction = new Vector2(crosshairTransform.position.x - transform.position.x, crosshairTransform.position.y - transform.position.y).normalized;
 
-        timerUntilDestoyed = 0.5f;
+        timerUntilDestoyed = 0.5f * 10;
     }
 
     void Update()
@@ -31,9 +32,11 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+
         if (collision.gameObject.name == "Collision (Wall)")
         {
             Destroy(gameObject);
+            Debug.Log("destroy" + collision.gameObject.name);
         }
     }
 }
