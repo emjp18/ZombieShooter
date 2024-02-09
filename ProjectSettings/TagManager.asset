@@ -7,6 +7,7 @@ TagManager:
   - zombie
   - Blocking
   - bullet
+  - Enemy
   layers:
   - Default
   - TransparentFX
