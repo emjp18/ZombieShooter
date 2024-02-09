@@ -1283,6 +1283,7 @@ GameObject:
   - component: {fileID: 5987493079393433712}
   - component: {fileID: 2065547418740335225}
   - component: {fileID: 7858215462970003965}
+  - component: {fileID: 1225329951301844493}
   m_Layer: 6
   m_Name: enemy_flocking 1
   m_TagString: zombie
@@ -1460,6 +1461,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pushbackForce: 2
   healthPoints: 20
+--- !u!114 &1225329951301844493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9026378493301704220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4261c619ece14a4aa15ab4154f26d13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attack: 10
+  playerHealth: {fileID: 0}
 --- !u!1 &9080371496240939943
 GameObject:
   m_ObjectHideFlags: 0

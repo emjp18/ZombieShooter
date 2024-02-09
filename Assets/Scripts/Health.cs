@@ -41,8 +41,14 @@ public class Health : MonoBehaviour
             
         }
     }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("zombie"))
+        {
+            TakeDamage(10);
+        }
+    }
 
-    
 
 
 }

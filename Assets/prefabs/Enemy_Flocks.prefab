@@ -49,3 +49,16 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  weightCohesion: 2.5
+  weightAlignment: 2.5
+  weightAvoidance: 2.5
+  speed: 3
+  chaseRange: 5
+  layerCount: 6
+  agentCount: 5
+  agentPrefab: {fileID: 0}
+  player: {fileID: 0}
+  avoidanceThreshold: 1
+  alignThreshold: 1
+  cohesionThreshold: 1
+  grid: {fileID: 0}
