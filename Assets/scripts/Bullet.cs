@@ -8,7 +8,7 @@ public class Bullet : MonoBehaviour
 
     private float timerUntilDestoyed;
     private Vector2 direction;
-    private float speed;
+    public float speed;
 
     void Start()
     {
@@ -16,7 +16,6 @@ public class Bullet : MonoBehaviour
         direction = (crosshairTransform.position - transform.position).normalized;
 
         timerUntilDestoyed = 0.5f;
-        speed = 80;
     }
 
     void Update()
@@ -32,7 +31,7 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Blocking"))
+        if (collision.gameObject.name == "Collision (Wall)")
         {
             Destroy(gameObject);
         }
