@@ -14,7 +14,7 @@ public abstract class AI_Agent
     protected Root root_AI_Node;
     protected List<Node> children_AI_Nodes;
     public abstract void Evaluate_Tree();
-
+   
     public abstract void Setup_Tree();
 }
 
@@ -28,6 +28,14 @@ namespace Behavior_Tree
         RUNNING,
         SUCCESS,
         FAILURE
+    }
+    public enum Current_Leaf_Node
+    {
+        IDLE,
+        CHASE,
+        ATTACK,
+        DEATH,
+        NONE
     }
     public class Node
     {
@@ -131,6 +139,9 @@ namespace Behavior_Tree
         Dictionary<string, object> dataContext = new Dictionary<string, object>();
         public Root(List<Node> children) : base(children) { parent = null; }
 
+
+     
+
         public ref Dictionary<string, object> GetData()
         {
             return ref dataContext;
@@ -198,14 +209,14 @@ namespace Behavior_Tree
         public Idle() : base() { }
         public override NodeState Evaluate()
         {
-            if ((bool)GetData("withinChaseRange"))
+            if ((bool)GetData("withinChaseRange")|| (bool)GetData("withinAttackRange"))
             {
 
                 return NodeState.FAILURE;
             }
-            SetData("movementDirection", Vector2.zero);
-            SetData("chasing", false);
-
+            //SetData("movementDirection", Vector2.zero);
+            //SetData("chasing", false);
+            SetData("currentLeafNode", Current_Leaf_Node.IDLE);
             return NodeState.RUNNING;
         }
     }
@@ -220,11 +231,42 @@ namespace Behavior_Tree
                 return NodeState.FAILURE;
             }
 
-            SetData("chasing", true);
+            //SetData("chasing", true);
 
-
+            SetData("currentLeafNode", Current_Leaf_Node.CHASE);
             return NodeState.RUNNING;
         }
     }
+    public class Death : Node
+    {
+        public Death() : base() { }
 
+        public override NodeState Evaluate()
+        {
+            if (!(bool)GetData("dead"))
+            {
+                return NodeState.FAILURE;
+            }
+
+            SetData("currentLeafNode", Current_Leaf_Node.DEATH);
+            return NodeState.SUCCESS;
+        }
+    }
+
+    public class Attack : Node
+    {
+        public Attack() : base() { }
+
+        public override NodeState Evaluate()
+        {
+            if (!(bool)GetData("attacking"))
+            {
+                return NodeState.FAILURE;
+            }
+
+            SetData("currentLeafNode", Current_Leaf_Node.ATTACK);
+          
+            return NodeState.RUNNING;
+        }
+    }
 }

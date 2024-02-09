@@ -33,7 +33,7 @@ public class AiGrid : MonoBehaviour
 
     [SerializeField] bool visualizeAstar = false;
 
-
+    public LayerMask CollisionLayer;
     Vector2 upperLeftCorner;
     Vector2 lowerRightCorner;
 
@@ -62,6 +62,7 @@ public class AiGrid : MonoBehaviour
             RegenerateGrid();
             regenerate = false;
         }
+        gridCenter = gridCenterTransform.position;
     }
  
     public QUAD_NODE Getroot() { return root; }
@@ -293,18 +294,10 @@ public class AiGrid : MonoBehaviour
 
                 boxCollider.offset = worldPos;
 
-                colliderResult = Physics2D.OverlapBoxAll(boxCollider.offset, boxCollider.size, 0);
-                bool obstacle = false;
-                foreach (Collider2D collision in colliderResult)
-                {
-                    if (collision == boxCollider)
-                        continue;
-
-                    obstacle = collision.gameObject.layer == 7;
-                    if (obstacle)
-                        break;
-
-                }
+                colliderResult = Physics2D.OverlapBoxAll(boxCollider.offset, boxCollider.size, 0, CollisionLayer);
+                bool obstacle = colliderResult.Length>0;
+                
+                
                 customGrid[x, y].obstacle = obstacle;
 
                 Vector2 pos = new Vector2(worldPos.x, worldPos.y);

@@ -1089,7 +1089,6 @@ GameObject:
   - component: {fileID: 9138215980198484084}
   - component: {fileID: 2744155597564979024}
   - component: {fileID: 7268417459120782140}
-  - component: {fileID: -6243623747407459347}
   - component: {fileID: 7467754483802778369}
   - component: {fileID: -7786300736974398219}
   m_Layer: 6
@@ -1109,7 +1108,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 8.219368, y: -7.455716, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4738573440821552559}
@@ -1193,24 +1192,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e64f400104ee2c4382e431962f807f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pushbackForce: 2.5
+  healthPoints: 100
   chaseRange: 5
+  attacRange: 1
   speed: 1
   player: {fileID: 0}
   grid: {fileID: 0}
---- !u!114 &-6243623747407459347
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6862071214157708326}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c454b9b0d491c6648a4a4fdec4b51704, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pushbackForce: 10
-  healthPoints: 20
 --- !u!50 &7467754483802778369
 Rigidbody2D:
   serializedVersion: 4
