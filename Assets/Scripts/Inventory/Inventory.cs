@@ -10,6 +10,7 @@ public class Inventory : MonoBehaviour
 
     private void Awake() //Checks so that there can only be a single instance of the inventory class at a time
     {
+        //DontDestroyOnLoad(gameObject);
         if (instance != null)
             Destroy(gameObject);
         else
@@ -36,6 +37,8 @@ public class Inventory : MonoBehaviour
     }
     public void RemoveItem(Item itemToRemove)
     {
+        //List<Item> itemsToRemove = new List<Item>();
+
         foreach (var item in items)
         {
             if(item.name == itemToRemove.name) //
@@ -43,11 +46,16 @@ public class Inventory : MonoBehaviour
                 item.count -= itemToRemove.count; //
                 if(item.count <= 0)
                 {
-                    items.Remove(itemToRemove);
+                    items.Remove(item);
                 }
                 break;
             }
         }
+        //foreach(var item in itemsToRemove)
+        //{
+        //    items.Remove(item);
+        //}
+
         Debug.Log(itemToRemove.count + " " + itemToRemove.name + "removed from inventory");
     }
 

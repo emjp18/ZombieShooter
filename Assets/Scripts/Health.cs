@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
+    float timerForHeal = 2.5f;
     public int maxHealth = 100;
     public int currentHealth;
 
@@ -42,12 +43,22 @@ public class Health : MonoBehaviour
         }
     }
 
+    void HealingIntervall()
+    {
+        timerForHeal -= Time.deltaTime;
+        if(timerForHeal <= 0)
+        {
+            timerForHeal = 2.5f;
+            Heal(2);
+        }
+    }
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
             TakeDamage(20);
         }
+        HealingIntervall();
     }
 
 
