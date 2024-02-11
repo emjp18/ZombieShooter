@@ -10,7 +10,7 @@ public class Bullet : MonoBehaviour
 
     private float timerUntilDestoyed;
     private Vector2 direction;
-    private float speed;
+    public float speed;
 
     void Start()
     {
@@ -20,7 +20,7 @@ public class Bullet : MonoBehaviour
         direction = new Vector2(crosshairTransform.position.x - transform.position.x, crosshairTransform.position.y - transform.position.y).normalized;
 
         timerUntilDestoyed = 0.1f;
-        speed = 100;
+        //speed = 100;
     }
 
     void Update()
@@ -36,13 +36,11 @@ public class Bullet : MonoBehaviour
         rigidbody.MovePosition(rigidbody.position + direction * speed * Time.fixedDeltaTime);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-
-        if (collision.gameObject.name == "Collision (Wall)")
+        if (other.gameObject.name == "Collision (Wall)")
         {
             Destroy(gameObject);
-            Debug.Log("destroy" + collision.gameObject.name);
         }
     }
 }
