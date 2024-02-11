@@ -209,13 +209,12 @@ namespace Behavior_Tree
         public Idle() : base() { }
         public override NodeState Evaluate()
         {
-            if ((bool)GetData("withinChaseRange")|| (bool)GetData("withinAttackRange"))
+            if ((bool)GetData("withinChaseRange")|| (bool)GetData("withinAttackRange") || (bool)GetData("dead"))
             {
 
                 return NodeState.FAILURE;
             }
-            //SetData("movementDirection", Vector2.zero);
-            //SetData("chasing", false);
+        
             SetData("currentLeafNode", Current_Leaf_Node.IDLE);
             return NodeState.RUNNING;
         }
@@ -226,13 +225,10 @@ namespace Behavior_Tree
 
         public override NodeState Evaluate()
         {
-            if (!(bool)GetData("withinChaseRange"))
+            if (!(bool)GetData("withinChaseRange")||(bool)GetData("withinAttackRange")|| (bool)GetData("dead"))
             {
                 return NodeState.FAILURE;
             }
-
-            //SetData("chasing", true);
-
             SetData("currentLeafNode", Current_Leaf_Node.CHASE);
             return NodeState.RUNNING;
         }
@@ -259,11 +255,11 @@ namespace Behavior_Tree
 
         public override NodeState Evaluate()
         {
-            if (!(bool)GetData("attacking"))
+            if (!(bool)GetData("withinAttackRange") || (bool)GetData("dead"))
             {
                 return NodeState.FAILURE;
             }
-
+           
             SetData("currentLeafNode", Current_Leaf_Node.ATTACK);
           
             return NodeState.RUNNING;

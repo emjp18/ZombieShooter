@@ -17,7 +17,7 @@ public class zombie_alone : MonoBehaviour
    
 
     public float chaseRange = 10;
-    public float attacRange = 1;
+    public float attacRange = 5;
     Vector2 dir;
 
     public float speed = 3;
@@ -66,11 +66,8 @@ public class zombie_alone : MonoBehaviour
             chase_AI_Node,
             attack_AI_Node
         };
-        //Selector selector_AI_Node = new Selector(children_AI_Nodes);
-
-        //children_AI_Nodes.Clear();
-
-        //children_AI_Nodes.Add(selector_AI_Node);
+        
+  
 
         root_AI_Node = new Root(children_AI_Nodes);
 
@@ -105,7 +102,7 @@ public class zombie_alone : MonoBehaviour
         {
             return false;
         }
-
+        
     }
     public void IsDead()
     {
@@ -115,22 +112,50 @@ public class zombie_alone : MonoBehaviour
     {
         if (collision.gameObject.tag == "bullet")
         {
-            //Debug.Log("hit");
+            animation.SetBool("attacking",false);
+            animation.SetBool("chasing", false);
+
             int damage = collision.gameObject.GetComponent<weapon_DamageScript>().damagePerHit;
             healthPoints -= damage;
-
+            animation.Play("hurt");
             rb.AddForce((collision.transform.position - GameObject.Find("Player").transform.position).normalized * pushbackForce, ForceMode2D.Impulse);
         }
+        
     }
+    private void FixedUpdate()
+    {
+        var coll = Physics2D.OverlapCircleAll(transform.position, box.size.x*0.25f);
+
+
+        foreach(Collider2D col in coll)
+        {
+            if(col.gameObject.tag =="Player")
+            {
+                root_AI_Node.SetData("withinAttackRange", true);
+               
+            }
+            else
+            {
+                root_AI_Node.SetData("withinAttackRange", false);
+            }
+        }
+        
+    }
+
     void Update()
     {
-        var withinRange = WithinChaseRangeCheck();
+       
 
         root_AI_Node.SetData("dead", healthPoints<=0);
 
-        root_AI_Node.SetData("withinChaseRange", withinRange);
+        root_AI_Node.SetData("withinChaseRange", (transform.position - player.position).magnitude < chaseRange);
+ 
 
-        root_AI_Node.SetData("withinAttackRange", WithinAttackRangeCheck());
+     
+   
+
+        animation.SetBool("attacking", false);
+        
 
         NodeState state = root_AI_Node.Evaluate();
 
@@ -143,16 +168,19 @@ public class zombie_alone : MonoBehaviour
             {
                 case Current_Leaf_Node.IDLE:
                     {
+                        
+                        animation.SetBool("chasing", false);
+                        animation.SetBool("attacking", false);
                         break;
                     }
                 case Current_Leaf_Node.CHASE:
                     {
-                        animation.SetBool("chasing", true);
-
+                        
+                        
 
                         if (navigation.GetPathFound())
                         {
-
+                            
                             var path = navigation.GetPath();
 
                             if (pathIndex >= path.Count || (bool)root_AI_Node.GetData("resetPath"))
@@ -164,18 +192,25 @@ public class zombie_alone : MonoBehaviour
                             }
                             else
                             {
+                                
                                 Vector2 goal = path[pathIndex].pos;
+
+                                if((goal-(Vector2)player.position).magnitude>4)
+                                {
+                                    pathIndex = 0;
+                                    navigation.ResetPath();
+                                    navigation.AStarSearch(transform.position, player.position);
+                                }
 
                                 dir = -((Vector2)transform.position - goal).normalized;
                                 root_AI_Node.SetData("movementDirection", dir);
-
+                                animation.SetBool("chasing", true);
                                 transform.position += ((Vector3)(dir)) * speed * Time.deltaTime;
 
                                 if (Vector2.Distance(transform.position, goal) <
                                     (float)root_AI_Node.GetData("cellExtent"))
                                 {
                                     pathIndex++;
-
 
                                 }
 
@@ -184,28 +219,30 @@ public class zombie_alone : MonoBehaviour
                         else
                         {
                             navigation.AStarSearch(transform.position, player.position);
+                           
                         }
 
                         break;
                     }
                 case Current_Leaf_Node.ATTACK:
                     {
-                        root_AI_Node.SetData("chasing", false);
-
+                        
+                        animation.SetBool("chasing", false);
                         animation.SetBool("attacking", true);
+                      
+                    
                         break;
                     }
                 case Current_Leaf_Node.DEATH:
                     {
-                        int nr = Random.Range(0, 1);
+                        
+                      
 
-                        animation.SetInteger("deathNr", nr);
+                        Destroy(this.gameObject);
 
 
-
-
-                        if (hasPlayedDeathAni)
-                            Destroy(this.gameObject);
+                        
+                            
                         break;
                     }
                      default:
@@ -216,20 +253,7 @@ public class zombie_alone : MonoBehaviour
         }
 
         
-        if (!(bool)root_AI_Node.GetData("attacking"))
-        {
-            animation.SetBool("attacking", false);
-        }
-        
-
-
-
-        if (!(bool)root_AI_Node.GetData("chasing"))
-        {
-
-            animation.SetBool("chasing", false);
-
-        }
+      
         
     }
 }

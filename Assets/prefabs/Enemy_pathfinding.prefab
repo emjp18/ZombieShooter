@@ -1192,10 +1192,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e64f400104ee2c4382e431962f807f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pushbackForce: 2.5
+  pushbackForce: 1
   healthPoints: 100
-  chaseRange: 5
-  attacRange: 1
+  chaseRange: 30
+  attacRange: 10
   speed: 1
   player: {fileID: 0}
   grid: {fileID: 0}
