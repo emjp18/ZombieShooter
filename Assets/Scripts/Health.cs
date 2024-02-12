@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
+    float timerForHeal = 2.5f;
     public int maxHealth = 100;
     public int currentHealth;
 
@@ -30,7 +31,7 @@ public class Health : MonoBehaviour
         }
     }
 
-    public void Heal(int health)
+    void Heal(int health)
     {
         currentHealth += health;
         bar.SetHealth(currentHealth);
@@ -41,14 +42,24 @@ public class Health : MonoBehaviour
             
         }
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+
+    void HealingIntervall()
     {
-        if (collision.gameObject.CompareTag("zombie"))
+        timerForHeal -= Time.deltaTime;
+        if(timerForHeal <= 0)
         {
-            TakeDamage(10);
+            timerForHeal = 2.5f;
+            Heal(2);
         }
     }
-
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            TakeDamage(20);
+        }
+        HealingIntervall();
+    }
 
 
 }

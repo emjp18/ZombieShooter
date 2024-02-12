@@ -1090,7 +1090,6 @@ GameObject:
   - component: {fileID: 2744155597564979024}
   - component: {fileID: 7268417459120782140}
   - component: {fileID: 7467754483802778369}
-  - component: {fileID: -7786300736974398219}
   m_Layer: 6
   m_Name: Enemy_pathfinding
   m_TagString: zombie
@@ -1226,20 +1225,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &-7786300736974398219
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6862071214157708326}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4261c619ece14a4aa15ab4154f26d13, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attack: 0
-  playerHealth: {fileID: 0}
 --- !u!1 &6875564583773481092
 GameObject:
   m_ObjectHideFlags: 0
