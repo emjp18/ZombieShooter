@@ -38,7 +38,7 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.name == "Collision (Wall)")
+        if (other.gameObject.name == "Collision (Wall)" || other.gameObject.tag == "zombie")
         {
             Destroy(gameObject);
         }
