@@ -9,6 +9,9 @@ using UnityEngine.Windows.Speech;
 
 public class Flock_Group_Script
 {
+
+   
+
     ContactFilter2D contactFilter = new ContactFilter2D();
     ContactFilter2D contactFilterWalls = new ContactFilter2D();
     float maxSpeed;
@@ -104,7 +107,11 @@ public class Flock_Group_Script
 
             //forward = (playerPos - (Vector2)agent.gameObject.transform.position).normalized;
             if (chasePlayer)
+            {
                 forward = (playerPos - (Vector2)agent.gameObject.transform.position).normalized;
+                agent.Root_AI_Node.SetData("withinChaseRange", true);
+            }
+                
 
 
 
@@ -163,6 +170,15 @@ public class Flock_Group_Script
        
            
             agent.transform.position += ((Vector3)(move)) * Time.deltaTime;
+
+            if(((Vector2)agent.transform.position-playerPos).magnitude<agent.attackRange)
+            {
+                agent.Root_AI_Node.SetData("withinAttackRange", true);
+            }
+            else
+            {
+                agent.Root_AI_Node.SetData("withinAttackRange", false);
+            }
         }
     }
 }

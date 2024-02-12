@@ -14,7 +14,8 @@ public class zombie_alone : MonoBehaviour
     public int healthPoints = 100;
 
     Root root_AI_Node;
-   
+
+    public ParticleSystem blood;
 
     public float chaseRange = 10;
     public float attacRange = 5;
@@ -66,9 +67,10 @@ public class zombie_alone : MonoBehaviour
             chase_AI_Node,
             attack_AI_Node
         };
-        
-  
 
+        blood = Instantiate<ParticleSystem>(blood, transform);
+        blood.gameObject.SetActive(true);
+        
         root_AI_Node = new Root(children_AI_Nodes);
 
         root_AI_Node.SetData("withinChaseRange", WithinChaseRangeCheck());
@@ -118,6 +120,7 @@ public class zombie_alone : MonoBehaviour
             int damage = collision.gameObject.GetComponent<weapon_DamageScript>().damagePerHit;
             healthPoints -= damage;
             animation.Play("hurt");
+            blood.Play();
             rb.AddForce((collision.transform.position - GameObject.Find("Player").transform.position).normalized * pushbackForce, ForceMode2D.Impulse);
         }
         
@@ -144,7 +147,7 @@ public class zombie_alone : MonoBehaviour
 
     void Update()
     {
-       
+        blood.transform.position = transform.position;
 
         root_AI_Node.SetData("dead", healthPoints<=0);
 
@@ -235,7 +238,7 @@ public class zombie_alone : MonoBehaviour
                     }
                 case Current_Leaf_Node.DEATH:
                     {
-                        
+
                       
 
                         Destroy(this.gameObject);
