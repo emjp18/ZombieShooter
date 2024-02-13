@@ -41,9 +41,6 @@ public class CollisionMovement : MonoBehaviour
         // GetAxis() returns a value of -1, 0 or 1 depending on button clicked, Which button does what can be seen under "input manager" in project settings
         // Its normalized so that the speed will be consistent even if you are walking diagonaly
         moveDirection = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0).normalized;
-
-        // Camera snap to player
-        camera.transform.position = new Vector3(transform.position.x, transform.position.y, -10);
     }
 
     private void FixedUpdate()
