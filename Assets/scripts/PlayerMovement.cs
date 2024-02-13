@@ -9,7 +9,7 @@ public class CollisionMovement : MonoBehaviour
     public Transform playerCrosshair;
     public Camera camera;
 
-    private Rigidbody2D rb;
+    private Rigidbody2D rigidBody;
 
     private float currentSpeed;
 
@@ -17,11 +17,9 @@ public class CollisionMovement : MonoBehaviour
     private Vector2 moveDirection;
     private Vector2 mousePosition;
 
-    // Start is called before the first frame update
     void Start()
     {
-        rb = gameObject.GetComponent<Rigidbody2D>();
-        //rb.gravityScale = 0.0f;
+        rigidBody = gameObject.GetComponent<Rigidbody2D>();
 
         currentSpeed = 5.0f;
 
@@ -30,7 +28,6 @@ public class CollisionMovement : MonoBehaviour
         Cursor.visible = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
         // Rotating rectangle to mouse position
@@ -51,7 +48,7 @@ public class CollisionMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.MovePosition(rb.position + moveDirection * currentSpeed * Time.fixedDeltaTime);
+        rigidBody.MovePosition(rigidBody.position + moveDirection * currentSpeed * Time.fixedDeltaTime);
         
         //Sets crosshairs position to that of the mouse
         playerCrosshair.position = new Vector3(mousePosition.x, mousePosition.y, 0);
