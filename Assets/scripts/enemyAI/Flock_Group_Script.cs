@@ -31,6 +31,7 @@ public class Flock_Group_Script
     int agentCount;
     public Transform Spawn {  get { return spawn; } }
 
+    public bool allDead = false;
     Vector2 forward;
     public Flock_Group_Script(Transform spawnpoint, int agentCount,
         float chaseRange, float weightCohesion, float weightAvoidance, float weightAlignment,
@@ -92,10 +93,15 @@ public class Flock_Group_Script
             }
             
         }
+       
 
         foreach (Zombie_Flock_Prefab_Script agent in agents)
         {
-           
+           if(agent==null)
+            {
+              
+                continue;
+            }
                 
 
 

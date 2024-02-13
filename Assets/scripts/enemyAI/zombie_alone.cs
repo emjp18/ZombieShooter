@@ -117,7 +117,7 @@ public class zombie_alone : MonoBehaviour
         {
             animation.SetBool("attacking",false);
             animation.SetBool("chasing", false);
-
+ 
             int damage = collision.gameObject.GetComponent<weapon_DamageScript>().damagePerHit;
             healthPoints -= damage;
             animation.Play("hurt");
@@ -125,6 +125,21 @@ public class zombie_alone : MonoBehaviour
             rb.AddForce((collision.transform.position - GameObject.Find("Player").transform.position).normalized * pushbackForce, ForceMode2D.Impulse);
         }
         
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "bullet")
+        {
+            animation.SetBool("attacking", false);
+            animation.SetBool("chasing", false);
+    
+            int damage = collision.gameObject.GetComponent<weapon_DamageScript>().damagePerHit;
+            healthPoints -= damage;
+            animation.Play("hurt");
+            blood.Play();
+            rb.AddForce((collision.transform.position - GameObject.Find("Player").transform.position).normalized * pushbackForce, ForceMode2D.Impulse);
+        }
     }
     private void FixedUpdate()
     {
@@ -259,14 +274,14 @@ public class zombie_alone : MonoBehaviour
                                 }
                         }
 
-                        
-                        Dying();
-                      
-                       
+
+                       StartCoroutine(Dying());
 
 
-                        
-                            
+
+
+
+
                         break;
                     }
                      default:
@@ -282,7 +297,8 @@ public class zombie_alone : MonoBehaviour
     }
      IEnumerator Dying()
     {
-        yield return new WaitForSeconds(animation.GetCurrentAnimatorClipInfo(0)[0].clip.length);
+     
+        yield return new WaitForSeconds(animation.GetCurrentAnimatorStateInfo(0).length);
 
         Destroy(this.gameObject);
     }

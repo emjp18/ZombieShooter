@@ -53,8 +53,7 @@ public class Enemy_Flocks_Script : MonoBehaviour
     {
        for(int i=0;i<groups.Count; i++)
         {
-           
-
+            
             groups[i].UpdateVariables(chaseRange, weightCohesion, weightAvoidance, weightAlignment,
                    weightStayWithinRadius, speed, avoidanceThreshold,alignThreshold,cohesionThreshold);
             groups[i].Update(player.position, navigation);

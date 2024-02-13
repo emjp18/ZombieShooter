@@ -91,6 +91,20 @@ public class Zombie_Flock_Prefab_Script : MonoBehaviour
         }
 
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "bullet")
+        {
+            animation.SetBool("attacking", false);
+            animation.SetBool("chasing", false);
+            
+            int damage = collision.gameObject.GetComponent<weapon_DamageScript>().damagePerHit;
+            healthPoints -= damage;
+            animation.Play("hurt");
+            blood.Play();
+            rb.AddForce((collision.transform.position - GameObject.Find("Player").transform.position).normalized * pushbackForce, ForceMode2D.Impulse);
+        }
+    }
     public bool WithinChaseRangeCheck()
     {
 
@@ -102,10 +116,7 @@ public class Zombie_Flock_Prefab_Script : MonoBehaviour
     private void Update()
     {
         blood.transform.position = transform.position;
-        if (healthPoints <= 0)
-        {
-            Destroy(this.gameObject);
-        }
+        root_AI_Node.SetData("dead", healthPoints <= 0);
 
         Behavior_Tree.NodeState state = root_AI_Node.Evaluate();
 
@@ -132,12 +143,37 @@ public class Zombie_Flock_Prefab_Script : MonoBehaviour
                     }
                 case Behavior_Tree.Current_Leaf_Node.DEATH:
                     {
-                     
+                        int nr = Random.Range(0, 1);
+
+                        switch (nr)
+                        {
+                            case 0:
+                                {
+                                    animation.Play("death_01");
+                                    break;
+                                }
+                            case 1:
+                                {
+                                    animation.Play("death_02");
+                                    break;
+                                }
+                            default:
+                                {
+                                    break;
+                                }
+                        }
+
+                        StartCoroutine(Dying());
                         break;
                     }
             }
 
         }
     }
+    IEnumerator Dying()
+    {
+        yield return new WaitForSeconds(animation.GetCurrentAnimatorStateInfo(0).length);
 
+        Destroy(this.gameObject);
+    }
 }
