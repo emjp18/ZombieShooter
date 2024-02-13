@@ -1280,8 +1280,8 @@ GameObject:
   - component: {fileID: 8841218988471267647}
   - component: {fileID: 2562211688264378624}
   - component: {fileID: 7390070338352268662}
-  - component: {fileID: 5987493079393433712}
   - component: {fileID: 2065547418740335225}
+  - component: {fileID: 5987493079393433712}
   m_Layer: 6
   m_Name: enemy_flocking 1
   m_TagString: zombie
@@ -1406,21 +1406,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 12.21
---- !u!114 &5987493079393433712
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9026378493301704220}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 509884905baed1a4a9c563cd7569b0e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pushbackForce: 0.75
-  healthPoints: 30
-  attackRange: 1.5
 --- !u!50 &2065547418740335225
 Rigidbody2D:
   serializedVersion: 4
@@ -1448,6 +1433,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &5987493079393433712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9026378493301704220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 509884905baed1a4a9c563cd7569b0e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pushbackForce: 0.75
+  healthPoints: 30
+  attackRange: 1.5
 --- !u!1 &9080371496240939943
 GameObject:
   m_ObjectHideFlags: 0
