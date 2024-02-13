@@ -1,6 +1,7 @@
 using Behavior_Tree;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEditorInternal;
 using UnityEngine;
 
@@ -238,10 +239,30 @@ public class zombie_alone : MonoBehaviour
                     }
                 case Current_Leaf_Node.DEATH:
                     {
+                        int nr = Random.Range(0,1);
 
+                        switch (nr)
+                        {
+                            case 0:
+                            {
+                                    animation.Play("death_01");
+                                    break;
+                            }
+                            case 1:
+                                {
+                                    animation.Play("death_02");
+                                    break;
+                                }
+                            default:
+                                {
+                                    break;
+                                }
+                        }
+
+                        
+                        Dying();
                       
-
-                        Destroy(this.gameObject);
+                       
 
 
                         
@@ -259,4 +280,11 @@ public class zombie_alone : MonoBehaviour
       
         
     }
+     IEnumerator Dying()
+    {
+        yield return new WaitForSeconds(animation.GetCurrentAnimatorClipInfo(0)[0].clip.length);
+
+        Destroy(this.gameObject);
+    }
+    
 }
