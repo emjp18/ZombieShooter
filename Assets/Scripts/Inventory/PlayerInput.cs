@@ -4,21 +4,22 @@ using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
 {
-    public float interactionDistance = 2f;
-    void Update()
+    public GameObject mainInventory; //Reference to the MainInventory GameObject
+    public GameObject darkBackGround;
+
+
+
+    private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, interactionDistance);
-
-            if(hit.collider != null )
+            if (mainInventory != null)
             {
-                PickUp pickUp = hit.collider.GetComponent<PickUp>();
-
-                if(pickUp != null )
-                {
-                    pickUp.PickUpItem();
-                }
+                mainInventory.SetActive(!mainInventory.activeSelf);
+            }
+            if(darkBackGround != null)
+            {
+                darkBackGround.SetActive(!darkBackGround.activeSelf);
             }
         }
     }
