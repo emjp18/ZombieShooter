@@ -18,35 +18,32 @@ public class Zombie_Flock_Prefab_Script : MonoBehaviour
     Behavior_Tree.Root root_AI_Node;
     Animator animation;
     public float attackRange = 3;
-     ParticleSystem blood;
+    ParticleSystem blood;
 
     public Behavior_Tree.Root Root_AI_Node { get { return root_AI_Node; } }
     public float ChaseRange { set { chaseRange = value; } }
     public Vector2 PlayerPos { set { playerPos = value; } }
     public Vector2 Direction { get { return direction; } set { direction = value; } }
     public CircleCollider2D AgentCollider { get { return agentCollider; } }
-    public Flock_Agent_Script Flock_Agent {  get { return flocking_script; } }
+    public Flock_Agent_Script Flock_Agent { get { return flocking_script; } }
+
     void Start()
     {
-        
+        var ps = GameObject.FindObjectsByType<ParticleSystem>(FindObjectsInactive.Include, FindObjectsSortMode.None);
 
-        var ps = GameObject.FindObjectsByType<ParticleSystem>(FindObjectsInactive.Include,FindObjectsSortMode.None);
-
-        foreach(ParticleSystem pas in ps)
+        foreach (ParticleSystem pas in ps)
         {
-           
-
-            if(pas.gameObject.name=="BloodSplatter")
+            if (pas.gameObject.name == "BloodSplatter")
             {
-                blood = Instantiate<ParticleSystem>(pas,this.transform);
+                blood = Instantiate<ParticleSystem>(pas, this.transform);
                 break;
             }
         }
         blood.gameObject.SetActive(true);
-    
 
-        animation= GetComponent<Animator>();    
-          agentCollider = GetComponent<CircleCollider2D>();
+
+        animation = GetComponent<Animator>();
+        agentCollider = GetComponent<CircleCollider2D>();
         box = GetComponent<BoxCollider2D>();
         rb = GetComponent<Rigidbody2D>();
         Behavior_Tree.Idle idle_AI_Node = new Behavior_Tree.Idle();
@@ -64,15 +61,12 @@ public class Zombie_Flock_Prefab_Script : MonoBehaviour
             attack_AI_Node
         };
 
-
-
         root_AI_Node = new Behavior_Tree.Root(children_AI_Nodes);
 
-   
+
         root_AI_Node.SetData("withinChaseRange", false);
         root_AI_Node.SetData("dead", false);
         root_AI_Node.SetData("withinAttackRange", false);
-   
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -81,38 +75,38 @@ public class Zombie_Flock_Prefab_Script : MonoBehaviour
             animation.SetBool("attacking", false);
             animation.SetBool("chasing", false);
 
-            int damage = collision.gameObject.GetComponent<weapon_DamageScript>().damagePerHit;
+            int damage = collision.gameObject.GetComponent<Bullet>().damage;
             healthPoints -= damage;
             animation.Play("hurt");
-            
+
             blood.Play();
 
             rb.AddForce((collision.transform.position - GameObject.Find("Player").transform.position).normalized * pushbackForce, ForceMode2D.Impulse);
         }
 
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "bullet")
         {
             animation.SetBool("attacking", false);
             animation.SetBool("chasing", false);
-            
-            int damage = collision.gameObject.GetComponent<weapon_DamageScript>().damagePerHit;
+
+            int damage = collision.gameObject.GetComponent<Bullet>().damage;
             healthPoints -= damage;
             animation.Play("hurt");
             blood.Play();
             rb.AddForce((collision.transform.position - GameObject.Find("Player").transform.position).normalized * pushbackForce, ForceMode2D.Impulse);
         }
     }
+
     public bool WithinChaseRangeCheck()
     {
 
         return ((Vector2)transform.position - playerPos).magnitude < chaseRange;
-
-
-
     }
+
     private void Update()
     {
         blood.transform.position = transform.position;
@@ -120,7 +114,7 @@ public class Zombie_Flock_Prefab_Script : MonoBehaviour
 
         Behavior_Tree.NodeState state = root_AI_Node.Evaluate();
 
-        if(state!=Behavior_Tree.NodeState.FAILURE)
+        if (state != Behavior_Tree.NodeState.FAILURE)
         {
             switch ((Behavior_Tree.Current_Leaf_Node)root_AI_Node.GetData("currentLeafNode"))
             {
@@ -167,7 +161,6 @@ public class Zombie_Flock_Prefab_Script : MonoBehaviour
                         break;
                     }
             }
-
         }
     }
     IEnumerator Dying()

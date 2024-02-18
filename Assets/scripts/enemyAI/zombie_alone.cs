@@ -118,7 +118,7 @@ public class zombie_alone : MonoBehaviour
             animation.SetBool("attacking",false);
             animation.SetBool("chasing", false);
  
-            int damage = collision.gameObject.GetComponent<weapon_DamageScript>().damagePerHit;
+            int damage = collision.gameObject.GetComponent<Bullet>().damage;
             healthPoints -= damage;
             animation.Play("hurt");
             blood.Play();
@@ -134,7 +134,7 @@ public class zombie_alone : MonoBehaviour
             animation.SetBool("attacking", false);
             animation.SetBool("chasing", false);
     
-            int damage = collision.gameObject.GetComponent<weapon_DamageScript>().damagePerHit;
+            int damage = collision.gameObject.GetComponent<Bullet>().damage;
             healthPoints -= damage;
             animation.Play("hurt");
             blood.Play();

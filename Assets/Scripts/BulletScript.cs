@@ -8,7 +8,9 @@ public class BulletScript : MonoBehaviour
 
     private float timerUntilDestoyed;
     private Vector2 direction;
+
     private float speed;
+    public int damage;
 
     void Start()
     {
