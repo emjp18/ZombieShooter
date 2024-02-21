@@ -11,6 +11,7 @@ public class Bullet : MonoBehaviour
     private float timerUntilDestoyed;
     private Vector2 direction;
     public float speed;
+    public int damage;
 
     void Start()
     {

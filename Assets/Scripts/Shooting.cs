@@ -13,6 +13,8 @@ public class Shooting : MonoBehaviour
     public float reloadTime;
     private float reloadTimer;
 
+    public int damage;
+
     void Start()
     {
         cameraMovement = Camera.main.GetComponent<CameraMovement>();
@@ -29,6 +31,7 @@ public class Shooting : MonoBehaviour
             //Clones a bullet at position of the gun + offset * transform.up to the offset independent of rotation, and then sets it active
             GameObject bulletInstance = Instantiate(bullet, gameObject.transform.position + spawnOffset * transform.up, gameObject.transform.rotation);
             bulletInstance.SetActive(true);
+            bulletInstance.GetComponent<Bullet>().damage = damage;
 
             reloadTimer = 0;
             cameraMovement.shakeTimer = 0;
