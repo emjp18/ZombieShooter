@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
 public class Item : MonoBehaviour
 {
@@ -17,16 +18,17 @@ public class Item : MonoBehaviour
     void Start()
     {
         inventoryManagerScript = GameObject.Find("Inventory").GetComponent<InventoryManagerScript>();
-    }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Player")
+        if(inventoryManagerScript == null)
         {
-            inventoryManagerScript.AddItem(itemName, itemCount, itemSprite);
-            Destroy(gameObject);
+            Debug.LogError("No inventory found no no");
         }
-        if(Input.GetKeyDown(KeyCode.E))
+    }
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
         {
+            Debug.Log("Item has collided with player");
+            inventoryManagerScript.AddItem(itemName, itemCount, itemSprite);
             Destroy(gameObject);
         }
     }
