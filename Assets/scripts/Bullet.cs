@@ -10,8 +10,10 @@ public class Bullet : MonoBehaviour
 
     private float timerUntilDestoyed;
     private Vector2 direction;
-    public float speed;
+
     public int damage;
+    public float speed;
+    public int range;
 
     void Start()
     {
@@ -20,7 +22,7 @@ public class Bullet : MonoBehaviour
         //Normalizes the vector from the bullets position to the crosshairs position, to create a vector representing the direction the bullet should move
         direction = new Vector2(crosshairTransform.position.x - transform.position.x, crosshairTransform.position.y - transform.position.y).normalized;
 
-        timerUntilDestoyed = 0.1f;
+        timerUntilDestoyed = range / speed;
         //speed = 100;
     }
 
