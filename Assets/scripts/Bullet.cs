@@ -8,11 +8,11 @@ public class Bullet : MonoBehaviour
     public Transform crosshairTransform;
     private new Rigidbody2D rigidbody;
 
-    [System.NonSerialized] public float timerUntilDestoyed;
     private Vector2 direction;
+    [System.NonSerialized] public float timerUntilDestoyed;
 
-    public int damage;
-    public float speed;
+    [System.NonSerialized] public int damage;
+    [System.NonSerialized] public float speed;
 
     void Start()
     {

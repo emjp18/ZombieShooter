@@ -10,11 +10,12 @@ public class Shooting : MonoBehaviour
 
     private float spawnOffset;
 
-    public float reloadTime;
     private float reloadTimer;
+    public float reloadTime;
 
     public int damage;
     public float range;
+    public float bulletSpeed;
 
     void Start()
     {
@@ -34,6 +35,7 @@ public class Shooting : MonoBehaviour
             bulletInstance.SetActive(true);
             Bullet bulletScript = bulletInstance.GetComponent<Bullet>();
             bulletScript.damage = damage;
+            bulletScript.speed = bulletSpeed;
             bulletScript.timerUntilDestoyed = range/bulletScript.speed;
 
             reloadTimer = 0;
