@@ -98,9 +98,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 0}
-  reloadTime: 5
+  reloadTime: 3
   damage: 20
   range: 5
+  bulletSpeed: 70
 --- !u!1 &1335404764175062147
 GameObject:
   m_ObjectHideFlags: 0
@@ -490,7 +491,8 @@ MonoBehaviour:
   bullet: {fileID: 0}
   reloadTime: 0
   damage: 1
-  range: 0.5
+  range: 1.5
+  bulletSpeed: 4
 --- !u!1 &7559299029366706264
 GameObject:
   m_ObjectHideFlags: 0
@@ -592,3 +594,4 @@ MonoBehaviour:
   reloadTime: 1
   damage: 10
   range: 5
+  bulletSpeed: 40
