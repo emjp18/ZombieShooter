@@ -14,7 +14,7 @@ public class Shooting : MonoBehaviour
     private float reloadTimer;
 
     public int damage;
-    public int range;
+    public float range;
 
     void Start()
     {

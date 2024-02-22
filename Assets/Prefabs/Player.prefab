@@ -100,6 +100,7 @@ MonoBehaviour:
   bullet: {fileID: 0}
   reloadTime: 5
   damage: 20
+  range: 5
 --- !u!1 &1335404764175062147
 GameObject:
   m_ObjectHideFlags: 0
@@ -489,6 +490,7 @@ MonoBehaviour:
   bullet: {fileID: 0}
   reloadTime: 0
   damage: 1
+  range: 0.5
 --- !u!1 &7559299029366706264
 GameObject:
   m_ObjectHideFlags: 0
@@ -589,3 +591,4 @@ MonoBehaviour:
   bullet: {fileID: 0}
   reloadTime: 1
   damage: 10
+  range: 5
