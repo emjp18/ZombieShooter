@@ -19,8 +19,8 @@ TagManager:
   - enemy
   - collision
   - Objects
-  - 
-  - 
+  - pathFindingEnemy
+  - Bullet
   - 
   - 
   - 

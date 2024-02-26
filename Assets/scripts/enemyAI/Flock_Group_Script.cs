@@ -10,7 +10,7 @@ using UnityEngine.Windows.Speech;
 public class Flock_Group_Script
 {
 
-   
+    bool lookingRight = true;
 
     ContactFilter2D contactFilter = new ContactFilter2D();
     ContactFilter2D contactFilterWalls = new ContactFilter2D();
@@ -102,7 +102,20 @@ public class Flock_Group_Script
               
                 continue;
             }
-                
+
+
+
+            //if ((playerPos - (Vector2)agent.gameObject.transform.position).x < 0 && lookingRight)
+            //{
+            //    lookingRight = false;
+            //    agent.GetComponentInParent<SpriteRenderer>().flipX = !agent.GetComponentInParent<SpriteRenderer>().flipX;
+            //}
+
+            //if ((playerPos - (Vector2)agent.gameObject.transform.position).x > 0 && !lookingRight)
+            //{
+            //    lookingRight = false;
+            //    agent.GetComponentInParent<SpriteRenderer>().flipX = !agent.GetComponentInParent<SpriteRenderer>().flipX;
+            //}
 
 
             agent.PlayerPos = playerPos;
