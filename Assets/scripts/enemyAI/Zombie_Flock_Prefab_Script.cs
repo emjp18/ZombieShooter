@@ -167,6 +167,9 @@ public class Zombie_Flock_Prefab_Script : MonoBehaviour
     {
         yield return new WaitForSeconds(animation.GetCurrentAnimatorStateInfo(0).length);
 
+        SceneValues.coinsForPlayer += 1;
+        Debug.Log(SceneValues.coinsForPlayer); 
+
         Destroy(this.gameObject);
     }
 }

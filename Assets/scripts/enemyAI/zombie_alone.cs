@@ -163,6 +163,7 @@ public class zombie_alone : MonoBehaviour
 
     void Update()
     {
+        Debug.Log("tjo katt"); 
         blood.transform.position = transform.position;
 
         root_AI_Node.SetData("dead", healthPoints<=0);
@@ -299,6 +300,11 @@ public class zombie_alone : MonoBehaviour
     {
      
         yield return new WaitForSeconds(animation.GetCurrentAnimatorStateInfo(0).length);
+
+        SceneValues.coinsForPlayer += 1;
+
+        Debug.Log(SceneValues.coinsForPlayer);
+        Debug.Log("Ser man detta eller?"); 
 
         Destroy(this.gameObject);
     }
