@@ -15,6 +15,6 @@ EditorBuildSettings:
     path: Assets/Scenes/SettingsScreen.unity
     guid: bdac34e5c3763e941a7c29f309db5773
   - enabled: 1
-    path: Assets/Scenes/LevelOneEnemies.unity
+    path: Assets/Scenes/Level_One.unity
     guid: f5ce8d86971d6bb4187501eedaca33a6
   m_configObjects: {}
