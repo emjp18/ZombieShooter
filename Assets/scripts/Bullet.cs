@@ -8,10 +8,11 @@ public class Bullet : MonoBehaviour
     public Transform crosshairTransform;
     private new Rigidbody2D rigidbody;
 
-    private float timerUntilDestoyed;
     private Vector2 direction;
-    public float speed;
-    public int damage;
+    [System.NonSerialized] public float timerUntilDestoyed;
+
+    [System.NonSerialized] public int damage;
+    [System.NonSerialized] public float speed;
 
     void Start()
     {
@@ -19,8 +20,6 @@ public class Bullet : MonoBehaviour
 
         //Normalizes the vector from the bullets position to the crosshairs position, to create a vector representing the direction the bullet should move
         direction = new Vector2(crosshairTransform.position.x - transform.position.x, crosshairTransform.position.y - transform.position.y).normalized;
-
-        timerUntilDestoyed = 0.1f;
         //speed = 100;
     }
 

@@ -10,10 +10,12 @@ public class Shooting : MonoBehaviour
 
     private float spawnOffset;
 
-    public float reloadTime;
     private float reloadTimer;
+    public float reloadTime;
 
     public int damage;
+    public float range;
+    public float bulletSpeed;
 
     void Start()
     {
@@ -31,7 +33,10 @@ public class Shooting : MonoBehaviour
             //Clones a bullet at position of the gun + offset * transform.up to the offset independent of rotation, and then sets it active
             GameObject bulletInstance = Instantiate(bullet, gameObject.transform.position + spawnOffset * transform.up, gameObject.transform.rotation);
             bulletInstance.SetActive(true);
-            bulletInstance.GetComponent<Bullet>().damage = damage;
+            Bullet bulletScript = bulletInstance.GetComponent<Bullet>();
+            bulletScript.damage = damage;
+            bulletScript.speed = bulletSpeed;
+            bulletScript.timerUntilDestoyed = range/bulletScript.speed;
 
             reloadTimer = 0;
             cameraMovement.shakeTimer = 0;
