@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Zombie_Flock_Prefab_Script : MonoBehaviour
@@ -11,7 +12,7 @@ public class Zombie_Flock_Prefab_Script : MonoBehaviour
     Vector2 playerPos;
     BoxCollider2D box;
     Rigidbody2D rb;
-    public float pushbackForce = 1.5f;
+    public float pushbackForce = 0.05f;
 
     public int healthPoints = 100;
     float chaseRange;
@@ -19,14 +20,14 @@ public class Zombie_Flock_Prefab_Script : MonoBehaviour
     Animator animation;
     public float attackRange = 3;
     ParticleSystem blood;
-
+    public bool physicsKNockback = false;
     public Behavior_Tree.Root Root_AI_Node { get { return root_AI_Node; } }
     public float ChaseRange { set { chaseRange = value; } }
     public Vector2 PlayerPos { set { playerPos = value; } }
     public Vector2 Direction { get { return direction; } set { direction = value; } }
     public CircleCollider2D AgentCollider { get { return agentCollider; } }
     public Flock_Agent_Script Flock_Agent { get { return flocking_script; } }
-
+  
     void Start()
     {
         var ps = GameObject.FindObjectsByType<ParticleSystem>(FindObjectsInactive.Include, FindObjectsSortMode.None);
@@ -40,7 +41,7 @@ public class Zombie_Flock_Prefab_Script : MonoBehaviour
             }
         }
         blood.gameObject.SetActive(true);
-
+        blood.Stop();
 
         animation = GetComponent<Animator>();
         agentCollider = GetComponent<CircleCollider2D>();
@@ -70,19 +71,20 @@ public class Zombie_Flock_Prefab_Script : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "bullet")
-        {
-            animation.SetBool("attacking", false);
-            animation.SetBool("chasing", false);
+        //if (collision.gameObject.tag == "bullet")
+        //{
+        //    animation.SetBool("attacking", false);
+        //    animation.SetBool("chasing", false);
 
-            int damage = collision.gameObject.GetComponent<Bullet>().damage;
-            healthPoints -= damage;
-            animation.Play("hurt");
+        //    int damage = collision.gameObject.GetComponent<Bullet>().damage;
+        //    healthPoints -= damage;
+        //    animation.Play("hurt");
 
-            blood.Play();
+        //    blood.Play();
 
-            rb.AddForce((collision.transform.position - GameObject.Find("Player").transform.position).normalized * pushbackForce, ForceMode2D.Impulse);
-        }
+        //    //rb.AddForce((collision.transform.position - GameObject.Find("Player").transform.position).normalized * pushbackForce, ForceMode2D.Impulse);
+           
+        //}
 
     }
 
@@ -92,12 +94,15 @@ public class Zombie_Flock_Prefab_Script : MonoBehaviour
         {
             animation.SetBool("attacking", false);
             animation.SetBool("chasing", false);
-
+            
             int damage = collision.gameObject.GetComponent<Bullet>().damage;
             healthPoints -= damage;
             animation.Play("hurt");
             blood.Play();
-            rb.AddForce((collision.transform.position - GameObject.Find("Player").transform.position).normalized * pushbackForce, ForceMode2D.Impulse);
+            if(physicsKNockback)
+                rb.AddForce((collision.transform.position - GameObject.Find("Player").transform.position).normalized * pushbackForce, ForceMode2D.Impulse);
+            else
+                transform.position += (collision.transform.position - GameObject.Find("Player").transform.position).normalized * pushbackForce;
         }
     }
 
@@ -109,6 +114,9 @@ public class Zombie_Flock_Prefab_Script : MonoBehaviour
 
     private void Update()
     {
+
+       
+
         blood.transform.position = transform.position;
         root_AI_Node.SetData("dead", healthPoints <= 0);
 
