@@ -13,6 +13,10 @@ public class Item : MonoBehaviour
     [SerializeField]
     private Sprite itemSprite;
 
+    [TextArea]
+    [SerializeField]
+    private string itemDescription;
+
     private InventoryManagerScript inventoryManagerScript;
 
     void Start()
@@ -28,7 +32,7 @@ public class Item : MonoBehaviour
         if (collision.gameObject.tag =="Player")
         {
             Debug.Log("Item has collided with player");
-            inventoryManagerScript.AddItem(itemName, itemCount, itemSprite);
+            inventoryManagerScript.AddItem(itemName, itemCount, itemSprite, itemDescription);
             Destroy(gameObject);
         }
     }
