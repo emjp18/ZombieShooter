@@ -5,6 +5,7 @@ using UnityEngine;
 public class InventoryManagerScript : MonoBehaviour
 {
     public GameObject InventoryMenu;
+    public ItemSlot[] itemSlot;
     private bool menuActivated;
     // Start is called before the first frame update
     void Start()
@@ -31,6 +32,13 @@ public class InventoryManagerScript : MonoBehaviour
     }
     public void AddItem(string itemName, int itemCount, Sprite itemSprite)
     {
-        Debug.Log("itemName = " + itemName + "itemCount = " + itemCount + "itemSprite = " + itemSprite);
+        for (int i = 0; i < itemSlot.Length; i++)
+        {
+            if (itemSlot[i].isFull == false)
+            {
+                itemSlot[i].AddItem(itemName, itemCount, itemSprite);
+                return;
+            }
+        }
     }
 }

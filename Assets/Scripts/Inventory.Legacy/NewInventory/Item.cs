@@ -17,7 +17,7 @@ public class Item : MonoBehaviour
 
     void Start()
     {
-        inventoryManagerScript = GameObject.Find("Inventory").GetComponent<InventoryManagerScript>();
+        inventoryManagerScript = GameObject.Find("InventoryCanvas").GetComponent<InventoryManagerScript>();
         if(inventoryManagerScript == null)
         {
             Debug.LogError("No inventory found no no");
@@ -25,7 +25,7 @@ public class Item : MonoBehaviour
     }
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.tag =="Player")
         {
             Debug.Log("Item has collided with player");
             inventoryManagerScript.AddItem(itemName, itemCount, itemSprite);
