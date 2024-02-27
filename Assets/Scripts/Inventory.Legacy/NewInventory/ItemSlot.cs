@@ -23,6 +23,13 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
     public GameObject selectedShader;
     public bool itemSelected;
 
+    private InventoryManagerScript inventoryManager;
+
+    private void Start()
+    {
+        inventoryManager = GameObject.Find("InventoryCanvas").GetComponent<InventoryManagerScript>();
+    }
+
     public void AddItem(string itemName, int quantity, Sprite itemSprite)
     {
         this.itemName = itemName;   
@@ -48,6 +55,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
     }
     public void OnLeftClick()
     {
+        inventoryManager.DeselectAllSlots();
         selectedShader.SetActive(true);
         itemSelected = true;
     }
