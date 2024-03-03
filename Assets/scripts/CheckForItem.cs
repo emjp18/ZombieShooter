@@ -26,11 +26,12 @@ public class CheckForItem : MonoBehaviour
     }
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("bam    " + CountNumberOfItem());
-        if (CountNumberOfItem() >= itemCount)
+        if (collision.gameObject.tag == "Player")
         {
-            Debug.Log("should work");
-            SceneManager.LoadScene(nextLevelName);
+            if (CountNumberOfItem() >= itemCount)
+            {
+                SceneManager.LoadScene(nextLevelName);
+            }
         }
     }
 }
