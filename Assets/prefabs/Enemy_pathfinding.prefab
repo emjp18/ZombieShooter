@@ -1193,6 +1193,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pushbackForce: 1
   healthPoints: 100
+  blood: {fileID: 0}
   chaseRange: 30
   attacRange: 10
   speed: 1

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -7,7 +8,12 @@ using UnityEngine.Jobs;
 public class CollisionMovement : MonoBehaviour
 {
     public Transform playerCrosshair;
+
+    public Transform thePlayerPosition; 
+
     public Camera camera;
+
+    private (float x, float y, float z) oldPos; 
 
     private Rigidbody2D rigidBody;
 
@@ -19,13 +25,31 @@ public class CollisionMovement : MonoBehaviour
 
     void Start()
     {
+
         rigidBody = gameObject.GetComponent<Rigidbody2D>();
+
+
+        if (SceneValues.earlierScene == "BuyShopScene")
+        {
+            oldPos = SceneValues.positionBeforeBuyShop; 
+            //problemet handlar kanske om att det är olika data? Detta är iallafall problemet. 
+
+            transform.position = new Vector3(oldPos.x, oldPos.y, oldPos.z ); 
+
+
+            
+
+            //rigidBody.position = SceneValues.positionBeforeBuyShop.position;
+
+        }
 
         currentSpeed = 5.0f;
 
         // Confine and hide cursor
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = false;
+
+        
     }
 
     void Update()
