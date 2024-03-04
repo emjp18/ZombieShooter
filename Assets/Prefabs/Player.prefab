@@ -291,6 +291,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bace78c5626ebe48aa624503303f878, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Gun: {fileID: 0}
+  Rifle: {fileID: 0}
+  FlameThrower: {fileID: 0}
 --- !u!114 &911316094279096984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -304,6 +307,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCrosshair: {fileID: 4010501476335754347}
+  thePlayerPosition: {fileID: 0}
   camera: {fileID: 0}
 --- !u!114 &4702323287756987466
 MonoBehaviour:
