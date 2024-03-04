@@ -21,6 +21,19 @@ public class Shooting : MonoBehaviour
     {
         cameraMovement = Camera.main.GetComponent<CameraMovement>();
 
+        if(SceneValues.damage != 0)
+        {
+            damage = SceneValues.damage; 
+
+
+        }
+        else
+        {
+            SceneValues.damage = damage; 
+        }
+
+        Debug.Log("Hur Mycket Skada gör vapnet?: " + SceneValues.damage); 
+
         //Calculates the offset needed so that the bullet can get cloned at its edge not center (to avoid the bullet overlapping with the player when its being fired)
         spawnOffset = (bullet.transform.lossyScale.y / 2);
     }

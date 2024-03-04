@@ -16,7 +16,7 @@ public class BuyShopScript : MonoBehaviour
     bool touchedBefore; 
     void Start()
     {
-        touchedBefore = true;
+    
         touching = true; 
        
     }
