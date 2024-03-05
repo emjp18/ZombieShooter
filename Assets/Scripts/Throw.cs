@@ -6,6 +6,7 @@ public class Throw : MonoBehaviour
 {
 
     public float throwForce = 10f;
+    public KeyCode actionKey;
 
     private Vector3 initialPosition;
 
@@ -17,7 +18,7 @@ public class Throw : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(actionKey))
         {
             ThrowItem();
         }
