@@ -11,15 +11,10 @@ public class Explode : MonoBehaviour
     public int damage = 10;
     public float explosionDelay = 1f;
     private float explosionTimer = 0f;
-    private bool isExploding = false;
+    public bool isExploding = false;
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.G) && !isExploding)
-        {
-            isExploding = true;
-            
-        }
 
         if (isExploding)
         {
