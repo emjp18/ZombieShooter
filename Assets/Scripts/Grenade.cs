@@ -9,9 +9,14 @@ public class Grenade : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(throwScript.actionKey))
+
+        if (throwScript.throwing)
         {
+                
             explodeScript.isExploding = true;
+            
         }
+        
     }
+
 }
