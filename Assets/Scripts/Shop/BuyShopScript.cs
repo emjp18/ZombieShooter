@@ -10,7 +10,7 @@ public class BuyShopScript : MonoBehaviour
     // Start is called before the first frame update
 
     public TilemapCollider2D theCollider;
-    public BoxCollider2D thePlayerCollider;
+    public CircleCollider2D thePlayerCollider;
     public Transform thePlayerPosition;
     bool touching; 
     bool touchedBefore; 
