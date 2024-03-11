@@ -8,6 +8,14 @@ public class SwitchWeapon : MonoBehaviour
     [SerializeField] private GameObject Rifle;
     [SerializeField] private GameObject FlameThrower;
 
+    /* USED FOR PLAYER MODEL ANIMATION */
+    public Animator playerAnimator;
+
+    void Start()
+    {
+        playerAnimator.SetInteger("WeaponType", 1);
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -15,18 +23,21 @@ public class SwitchWeapon : MonoBehaviour
             Gun.SetActive(true);
             Rifle.SetActive(false);
             FlameThrower.SetActive(false);
+            playerAnimator.SetInteger("WeaponType", 1);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             Gun.SetActive(false);
             Rifle.SetActive(true);
             FlameThrower.SetActive(false);
+            playerAnimator.SetInteger("WeaponType", 2);
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             Gun.SetActive(false);
             Rifle.SetActive(false);
             FlameThrower.SetActive(true);
+            playerAnimator.SetInteger("WeaponType", 3);
         }
     }
 }

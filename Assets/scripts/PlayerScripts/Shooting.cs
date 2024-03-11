@@ -17,6 +17,14 @@ public class Shooting : MonoBehaviour
     public float range;
     public float bulletSpeed;
 
+    /* USED FOR PLAYER MODEL ANIMATION */
+    public Animator playerAnimator;
+
+    IEnumerator ResetAnimationState()
+    {
+        yield return new WaitForSeconds(0.5f);
+        playerAnimator.Play("Gun_Idle");
+    }
     void Start()
     {
         cameraMovement = Camera.main.GetComponent<CameraMovement>();
@@ -30,6 +38,9 @@ public class Shooting : MonoBehaviour
         reloadTimer += Time.deltaTime;
         if (Input.GetMouseButtonDown(0) && reloadTimer >= reloadTime)
         {
+            playerAnimator.SetTrigger("Shoot");
+            StartCoroutine(ResetAnimationState());
+
             //Clones a bullet at position of the gun + offset * transform.up to the offset independent of rotation, and then sets it active
             GameObject bulletInstance = Instantiate(bullet, gameObject.transform.position + spawnOffset * transform.up, gameObject.transform.rotation);
             bulletInstance.SetActive(true);

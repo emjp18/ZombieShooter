@@ -17,11 +17,17 @@ public class CollisionMovement : MonoBehaviour
 
     private Rigidbody2D rigidBody;
 
-    private float currentSpeed;
+    private float currentSpeed = 0.0f;
 
     private Vector2 faceDirection;
     private Vector2 moveDirection;
     private Vector2 mousePosition;
+
+    /* USED FOR PLAYER MODEL ANIMATION */
+    public Animator playerAnimator;
+    
+
+
 
     void Start()
     {
@@ -43,7 +49,7 @@ public class CollisionMovement : MonoBehaviour
 
         }
 
-        currentSpeed = 5.0f;
+        //currentSpeed = 3.0f;
 
         // Confine and hide cursor
         Cursor.lockState = CursorLockMode.Confined;
@@ -54,6 +60,8 @@ public class CollisionMovement : MonoBehaviour
 
     void Update()
     {
+        playerAnimator.SetFloat("Speed", currentSpeed);
+
         // Rotating rectangle to mouse position
         //setting a direction for the rotation based on
         //transform and mouse position and then sets a crosshair to the positon of the mouse
@@ -64,6 +72,16 @@ public class CollisionMovement : MonoBehaviour
 
         // GetAxis() returns a value of -1, 0 or 1 depending on button clicked, Which button does what can be seen under "input manager" in project settings
         // Its normalized so that the speed will be consistent even if you are walking diagonaly
+
+        if (moveDirection != Vector2.zero)
+        {
+            currentSpeed = 3.0f;
+        }
+        else
+        {
+            currentSpeed = 0.0f;
+        }
+
         moveDirection = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0).normalized;
     }
 
