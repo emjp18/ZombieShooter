@@ -25,7 +25,8 @@ public class CollisionMovement : MonoBehaviour
 
     /* USED FOR PLAYER MODEL ANIMATION */
     public Animator playerAnimator;
-    
+    public RectTransform crosshairRectTransform;
+
 
 
 
@@ -73,6 +74,7 @@ public class CollisionMovement : MonoBehaviour
         // GetAxis() returns a value of -1, 0 or 1 depending on button clicked, Which button does what can be seen under "input manager" in project settings
         // Its normalized so that the speed will be consistent even if you are walking diagonaly
 
+        /* USED FOR SWITCHING ANIMATION STATES */
         if (moveDirection != Vector2.zero)
         {
             currentSpeed = 3.0f;
@@ -89,6 +91,9 @@ public class CollisionMovement : MonoBehaviour
     {
         rigidBody.MovePosition(rigidBody.position + moveDirection * currentSpeed * Time.fixedDeltaTime);
         
+        /* SETS CROSSHAIR AT MOUSE POS */
+        crosshairRectTransform.position = Input.mousePosition;
+
         //Sets crosshairs position to that of the mouse
         playerCrosshair.position = new Vector3(mousePosition.x, mousePosition.y, 0);
     }
