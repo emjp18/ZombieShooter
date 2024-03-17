@@ -9,11 +9,11 @@ public class CollisionMovement : MonoBehaviour
 {
     public Transform playerCrosshair;
 
-    public Transform thePlayerPosition; 
+    public Transform thePlayerPosition;
 
     public Camera camera;
 
-    private (float x, float y, float z) oldPos; 
+    private (float x, float y, float z) oldPos;
 
     private Rigidbody2D rigidBody;
 
@@ -27,7 +27,7 @@ public class CollisionMovement : MonoBehaviour
     public Animator playerAnimator;
     public RectTransform crosshairRectTransform;
 
-
+    [SerializeField] private Health playerHealthScript;
 
 
     void Start()
@@ -38,13 +38,11 @@ public class CollisionMovement : MonoBehaviour
 
         if (SceneValues.earlierScene == "BuyShopScene")
         {
-            oldPos = SceneValues.positionBeforeBuyShop; 
+            oldPos = SceneValues.positionBeforeBuyShop;
             //problemet handlar kanske om att det är olika data? Detta är iallafall problemet. 
 
-            transform.position = new Vector3(oldPos.x, oldPos.y, oldPos.z ); 
+            transform.position = new Vector3(oldPos.x, oldPos.y, oldPos.z);
 
-
-            
 
             //rigidBody.position = SceneValues.positionBeforeBuyShop.position;
 
@@ -56,7 +54,7 @@ public class CollisionMovement : MonoBehaviour
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = false;
 
-        
+
     }
 
     void Update()
@@ -90,11 +88,19 @@ public class CollisionMovement : MonoBehaviour
     private void FixedUpdate()
     {
         rigidBody.MovePosition(rigidBody.position + moveDirection * currentSpeed * Time.fixedDeltaTime);
-        
+
         /* SETS CROSSHAIR AT MOUSE POS */
         crosshairRectTransform.position = Input.mousePosition;
 
         //Sets crosshairs position to that of the mouse
         playerCrosshair.position = new Vector3(mousePosition.x, mousePosition.y, 0);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Enviromental Hazard")
+        {
+            playerHealthScript.currentHealth -= collision.GetComponent<DamagingSpikes>().damage;
+        }
     }
 }
