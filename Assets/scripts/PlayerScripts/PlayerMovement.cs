@@ -29,6 +29,8 @@ public class CollisionMovement : MonoBehaviour
 
     [SerializeField] private Health playerHealthScript;
 
+    private bool slowed;
+
 
     void Start()
     {
@@ -75,7 +77,14 @@ public class CollisionMovement : MonoBehaviour
         /* USED FOR SWITCHING ANIMATION STATES */
         if (moveDirection != Vector2.zero)
         {
-            currentSpeed = 3.0f;
+            if (slowed == false)
+            {
+                currentSpeed = 3.0f;
+            }
+            else
+            {
+                currentSpeed = 1.0f;
+            }
         }
         else
         {
@@ -101,6 +110,17 @@ public class CollisionMovement : MonoBehaviour
         if (collision.tag == "Enviromental Hazard")
         {
             playerHealthScript.currentHealth -= collision.GetComponent<DamagingSpikes>().damage;
+        }
+        if (collision.tag == "Slowing Area")
+        {
+            slowed = true;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "Slowing Area")
+        {
+            slowed = false;
         }
     }
 }

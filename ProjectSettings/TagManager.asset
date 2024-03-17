@@ -10,6 +10,8 @@ TagManager:
   - Enemy
   - Gun
   - Grenade
+  - Enviromental Hazard
+  - Slowing Area
   layers:
   - Default
   - TransparentFX
