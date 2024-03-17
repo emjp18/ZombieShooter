@@ -11,12 +11,14 @@ GameObject:
   - component: {fileID: 7101389976608797585}
   - component: {fileID: 3366792155670403768}
   - component: {fileID: 3237010140123431013}
-  - component: {fileID: 1713186408799692332}
-  - component: {fileID: 8873880715570672027}
   - component: {fileID: 4799074240698618974}
+  - component: {fileID: -2264176365130518895}
+  - component: {fileID: -3403346204181314565}
+  - component: {fileID: -7031165245752364040}
+  - component: {fileID: -6793711260648520350}
   m_Layer: 0
   m_Name: Grenade
-  m_TagString: Untagged
+  m_TagString: Grenade
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31,7 +33,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
+  m_LocalScale: {x: 0.05, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -77,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: b3f788c9d8309894c81f4a5c18771aa7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ddad0311dea9cd24083cfc579c8444ce, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -123,39 +125,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &1713186408799692332
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2464453470552889041}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c43f9f778efb3f144a6ceb5c8bf0b534, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactField: 3
-  force: 150
-  lmToHit:
-    serializedVersion: 2
-    m_Bits: 64
-  explosionPrefab: {fileID: 6420556366306236325, guid: a7d097e9384031443b9b70deadcd4174, type: 3}
-  damage: 10
-  explosionDelay: 1
---- !u!114 &8873880715570672027
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2464453470552889041}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6de793588f824da4da0ca5ecc237cc72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  throwForce: 10
 --- !u!50 &4799074240698618974
 Rigidbody2D:
   serializedVersion: 4
@@ -183,3 +152,70 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-2264176365130518895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2464453470552889041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c43f9f778efb3f144a6ceb5c8bf0b534, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  impactField: 2.5
+  force: 20
+  lmToHit:
+    serializedVersion: 2
+    m_Bits: 64
+  explosionPrefab: {fileID: 6420556366306236325, guid: a7d097e9384031443b9b70deadcd4174, type: 3}
+  damage: 10
+  explosionDelay: 1
+  isExploding: 0
+--- !u!114 &-3403346204181314565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2464453470552889041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6de793588f824da4da0ca5ecc237cc72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  throwForce: 10
+  actionKey: 103
+  activeItemScript: {fileID: -6793711260648520350}
+--- !u!114 &-7031165245752364040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2464453470552889041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97ef99455347431478bc74bd69caf866, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explodeScript: {fileID: -2264176365130518895}
+  throwScript: {fileID: -3403346204181314565}
+--- !u!114 &-6793711260648520350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2464453470552889041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f6764f58c221e14d8000e1036e276a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemName: Grenade
+  itemCount: 1
+  itemSprite: {fileID: 21300000, guid: ddad0311dea9cd24083cfc579c8444ce, type: 3}
+  itemDescription: 
+  inInventory: 0

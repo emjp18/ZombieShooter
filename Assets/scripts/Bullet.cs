@@ -20,7 +20,6 @@ public class Bullet : MonoBehaviour
 
         //Normalizes the vector from the bullets position to the crosshairs position, to create a vector representing the direction the bullet should move
         direction = new Vector2(crosshairTransform.position.x - transform.position.x, crosshairTransform.position.y - transform.position.y).normalized;
-        //speed = 100;
     }
 
     void Update()
