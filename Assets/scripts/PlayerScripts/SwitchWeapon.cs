@@ -54,7 +54,7 @@ public class SwitchWeapon : MonoBehaviour
             FlameThrower.SetActive(false);
             Knife.SetActive(true);
             Bat.SetActive(false);
-            playerAnimator.SetInteger("WeaponType", 3);
+            playerAnimator.SetInteger("WeaponType", 4);
         }
         if (Input.GetKeyDown(KeyCode.Alpha5))
         {
@@ -63,7 +63,7 @@ public class SwitchWeapon : MonoBehaviour
             FlameThrower.SetActive(false);
             Knife.SetActive(false);
             Bat.SetActive(true);
-            playerAnimator.SetInteger("WeaponType", 3);
+            playerAnimator.SetInteger("WeaponType", 5);
         }
     }
 }
