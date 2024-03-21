@@ -23,6 +23,7 @@ public class Zombie_Flock_Prefab_Script : MonoBehaviour
     public bool physicsKNockback = false;
 
     [SerializeField] private GameObject ZombieCorpsePrefab;
+    [SerializeField] private GameObject coinPrefab;
 
     public Behavior_Tree.Root Root_AI_Node { get { return root_AI_Node; } }
     public float ChaseRange { set { chaseRange = value; } }
@@ -30,7 +31,7 @@ public class Zombie_Flock_Prefab_Script : MonoBehaviour
     public Vector2 Direction { get { return direction; } set { direction = value; } }
     public CircleCollider2D AgentCollider { get { return agentCollider; } }
     public Flock_Agent_Script Flock_Agent { get { return flocking_script; } }
-  
+
     void Start()
     {
         var ps = GameObject.FindObjectsByType<ParticleSystem>(FindObjectsInactive.Include, FindObjectsSortMode.None);
@@ -86,7 +87,7 @@ public class Zombie_Flock_Prefab_Script : MonoBehaviour
         //    blood.Play();
 
         //    //rb.AddForce((collision.transform.position - GameObject.Find("Player").transform.position).normalized * pushbackForce, ForceMode2D.Impulse);
-           
+
         //}
 
     }
@@ -97,12 +98,12 @@ public class Zombie_Flock_Prefab_Script : MonoBehaviour
         {
             animation.SetBool("attacking", false);
             animation.SetBool("chasing", false);
-            
+
             int damage = collision.gameObject.GetComponent<Bullet>().damage;
             healthPoints -= damage;
             animation.Play("hurt");
             blood.Play();
-            if(physicsKNockback)
+            if (physicsKNockback)
                 rb.AddForce((collision.transform.position - GameObject.Find("Player").transform.position).normalized * pushbackForce, ForceMode2D.Impulse);
             else
                 transform.position += (collision.transform.position - GameObject.Find("Player").transform.position).normalized * pushbackForce;
@@ -118,7 +119,7 @@ public class Zombie_Flock_Prefab_Script : MonoBehaviour
     private void Update()
     {
 
-       
+
 
         blood.transform.position = transform.position;
         root_AI_Node.SetData("dead", healthPoints <= 0);
@@ -178,10 +179,13 @@ public class Zombie_Flock_Prefab_Script : MonoBehaviour
     {
         yield return new WaitForSeconds(animation.GetCurrentAnimatorStateInfo(0).length);
 
-        SceneValues.coinsForPlayer += 1;
-        Debug.Log(SceneValues.coinsForPlayer);
+        Instantiate(ZombieCorpsePrefab, gameObject.transform.position+ZombieCorpsePrefab.transform.localScale, gameObject.transform.rotation).SetActive(true);
 
-        Instantiate(ZombieCorpsePrefab, gameObject.transform.position, gameObject.transform.rotation).SetActive(true);
+        for (int i = 0; i < Random.Range(1, 4); i++)
+        {
+            Vector3 randomOffset = new Vector3((Random.Range(0f, 2f) - 1f)/4, (Random.Range(0f, 2f) - 1f)/4, 0);
+            Instantiate(coinPrefab, gameObject.transform.position + randomOffset, gameObject.transform.rotation).SetActive(true);
+        }
 
         Destroy(this.gameObject);
     }
