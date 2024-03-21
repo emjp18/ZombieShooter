@@ -21,6 +21,9 @@ public class Zombie_Flock_Prefab_Script : MonoBehaviour
     public float attackRange = 3;
     ParticleSystem blood;
     public bool physicsKNockback = false;
+
+    [SerializeField] private GameObject ZombieCorpsePrefab;
+
     public Behavior_Tree.Root Root_AI_Node { get { return root_AI_Node; } }
     public float ChaseRange { set { chaseRange = value; } }
     public Vector2 PlayerPos { set { playerPos = value; } }
@@ -176,7 +179,9 @@ public class Zombie_Flock_Prefab_Script : MonoBehaviour
         yield return new WaitForSeconds(animation.GetCurrentAnimatorStateInfo(0).length);
 
         SceneValues.coinsForPlayer += 1;
-        Debug.Log(SceneValues.coinsForPlayer); 
+        Debug.Log(SceneValues.coinsForPlayer);
+
+        Instantiate(ZombieCorpsePrefab, gameObject.transform.position, gameObject.transform.rotation).SetActive(true);
 
         Destroy(this.gameObject);
     }
