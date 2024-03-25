@@ -11,15 +11,10 @@ public class Explode : MonoBehaviour
     public int damage = 10;
     public float explosionDelay = 1f;
     private float explosionTimer = 0f;
-    private bool isExploding = false;
+    public bool isExploding = false;
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.G) && !isExploding)
-        {
-            isExploding = true;
-            
-        }
 
         if (isExploding)
         {
@@ -44,6 +39,7 @@ public class Explode : MonoBehaviour
         // Instantiate the explosion at the bomb's position with the offset
         Instantiate(explosionPrefab, transform.position + new Vector3(offset, 0, 0), Quaternion.identity);
         Destroy(gameObject);
+        //===========Deal Damage===========
     }
 
     private void OnDrawGizmosSelected()

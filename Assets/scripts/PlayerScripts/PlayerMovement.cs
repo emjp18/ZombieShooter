@@ -9,19 +9,28 @@ public class CollisionMovement : MonoBehaviour
 {
     public Transform playerCrosshair;
 
-    public Transform thePlayerPosition; 
+    public Transform thePlayerPosition;
 
     public Camera camera;
 
-    private (float x, float y, float z) oldPos; 
+    private (float x, float y, float z) oldPos;
 
     private Rigidbody2D rigidBody;
 
-    private float currentSpeed;
+    private float currentSpeed = 0.0f;
 
     private Vector2 faceDirection;
     private Vector2 moveDirection;
     private Vector2 mousePosition;
+
+    /* USED FOR PLAYER MODEL ANIMATION */
+    public Animator playerAnimator;
+    public RectTransform crosshairRectTransform;
+
+    [SerializeField] private Health playerHealthScript;
+
+    private bool slowed;
+
 
     void Start()
     {
@@ -31,29 +40,29 @@ public class CollisionMovement : MonoBehaviour
 
         if (SceneValues.earlierScene == "BuyShopScene")
         {
-            oldPos = SceneValues.positionBeforeBuyShop; 
+            oldPos = SceneValues.positionBeforeBuyShop;
             //problemet handlar kanske om att det är olika data? Detta är iallafall problemet. 
 
-            transform.position = new Vector3(oldPos.x, oldPos.y, oldPos.z ); 
+            transform.position = new Vector3(oldPos.x, oldPos.y, oldPos.z);
 
-
-            
 
             //rigidBody.position = SceneValues.positionBeforeBuyShop.position;
 
         }
 
-        currentSpeed = 5.0f;
+        //currentSpeed = 3.0f;
 
         // Confine and hide cursor
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = false;
 
-        
+
     }
 
     void Update()
     {
+        playerAnimator.SetFloat("Speed", currentSpeed);
+
         // Rotating rectangle to mouse position
         //setting a direction for the rotation based on
         //transform and mouse position and then sets a crosshair to the positon of the mouse
@@ -64,14 +73,54 @@ public class CollisionMovement : MonoBehaviour
 
         // GetAxis() returns a value of -1, 0 or 1 depending on button clicked, Which button does what can be seen under "input manager" in project settings
         // Its normalized so that the speed will be consistent even if you are walking diagonaly
+
+        /* USED FOR SWITCHING ANIMATION STATES */
+        if (moveDirection != Vector2.zero)
+        {
+            if (slowed == false)
+            {
+                currentSpeed = 3.0f;
+            }
+            else
+            {
+                currentSpeed = 1.0f;
+            }
+        }
+        else
+        {
+            currentSpeed = 0.0f;
+        }
+
         moveDirection = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0).normalized;
     }
 
     private void FixedUpdate()
     {
         rigidBody.MovePosition(rigidBody.position + moveDirection * currentSpeed * Time.fixedDeltaTime);
-        
+
+        /* SETS CROSSHAIR AT MOUSE POS */
+        crosshairRectTransform.position = Input.mousePosition;
+
         //Sets crosshairs position to that of the mouse
         playerCrosshair.position = new Vector3(mousePosition.x, mousePosition.y, 0);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Enviromental Hazard")
+        {
+            playerHealthScript.currentHealth -= collision.GetComponent<DamagingSpikes>().damage;
+        }
+        if (collision.tag == "Slowing Area")
+        {
+            slowed = true;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "Slowing Area")
+        {
+            slowed = false;
+        }
     }
 }

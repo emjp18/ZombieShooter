@@ -26,11 +26,11 @@ public class BuyShopScript : MonoBehaviour
     {
         touchedBefore = touching; 
         touching = theCollider.IsTouching(thePlayerCollider);
-        Debug.Log(touching); 
+        // Debug.Log(touching); 
 
         if (touching && !touchedBefore)
         {
-            Debug.Log("Funkar"); 
+            // Debug.Log("Funkar"); 
             SceneValues.earlierScene = SceneManager.GetActiveScene().name;
             SceneManager.LoadScene("BuyShopScene");
             SceneValues.positionBeforeBuyShop = (thePlayerPosition.position.x, thePlayerPosition.position.y, thePlayerPosition.position.z ); 
