@@ -17,6 +17,8 @@ public class Shooting : MonoBehaviour
     public float range;
     public float bulletSpeed;
 
+    public bool cameraShake;
+
     /* USED FOR PLAYER MODEL ANIMATION */
     public Animator playerAnimator;
 
@@ -36,7 +38,7 @@ public class Shooting : MonoBehaviour
     void Update()
     {
         reloadTimer += Time.deltaTime;
-        if (Input.GetMouseButtonDown(0) && reloadTimer >= reloadTime)
+        if (Input.GetMouseButton(0) && reloadTimer >= reloadTime)
         {
             playerAnimator.SetTrigger("Shoot");
             StartCoroutine(ResetAnimationState());
@@ -50,7 +52,11 @@ public class Shooting : MonoBehaviour
             bulletScript.timerUntilDestoyed = range/bulletScript.speed;
 
             reloadTimer = 0;
-            cameraMovement.shakeTimer = 0;
+
+            if (cameraShake == true)
+            {
+                cameraMovement.shakeTimer = 0;
+            }
         }
     }
 }
