@@ -50,6 +50,7 @@ MonoBehaviour:
   damage: 20
   range: 6
   bulletSpeed: 70
+  cameraShake: 1
   playerAnimator: {fileID: 2589428789494150369}
 --- !u!1 &926186173282123623
 GameObject:
@@ -945,6 +946,7 @@ MonoBehaviour:
   damage: 7
   range: 2
   bulletSpeed: 10
+  cameraShake: 0
   playerAnimator: {fileID: 2589428789494150369}
 --- !u!1 &6512324544407735481
 GameObject:
@@ -992,10 +994,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 1299606039858779480}
-  reloadTime: 0
-  damage: 1
-  range: 0.8
+  reloadTime: 0.1
+  damage: 4
+  range: 0.7
   bulletSpeed: 4
+  cameraShake: 1
   playerAnimator: {fileID: 2589428789494150369}
 --- !u!1 &7559299029366706264
 GameObject:
@@ -1047,6 +1050,7 @@ MonoBehaviour:
   damage: 10
   range: 6
   bulletSpeed: 40
+  cameraShake: 1
   playerAnimator: {fileID: 2589428789494150369}
 --- !u!1 &8753556011275591192
 GameObject:
@@ -1270,6 +1274,7 @@ MonoBehaviour:
   damage: 10
   range: 1
   bulletSpeed: 10
+  cameraShake: 0
   playerAnimator: {fileID: 2589428789494150369}
 --- !u!1 &9221980465900175661
 GameObject:
