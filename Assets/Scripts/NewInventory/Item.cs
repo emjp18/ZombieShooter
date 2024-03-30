@@ -13,6 +13,9 @@ public class Item : MonoBehaviour
     [SerializeField]
     private Sprite itemSprite;
 
+    [SerializeField]
+    private float itemDropRate;
+
     [TextArea]
     [SerializeField]
     private string itemDescription;
