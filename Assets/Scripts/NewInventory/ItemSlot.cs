@@ -15,7 +15,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
     public string itemDescription;
 
     [SerializeField]
-    int maxNumberOfItems;
+    private int maxNumberOfItems;
 
     //======FOR ITEM SLOT======//
     [SerializeField]
@@ -46,9 +46,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
     {
         //Check to see if slot is already full
         if (isFull)
-        {
             return quantity;
-        }
 
         //up Name
         this.itemName = itemName;
@@ -94,6 +92,9 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
     }
     public void OnLeftClick()
     {
+        if(itemSelected)
+            inventoryManager.UseItem(itemName);
+
         inventoryManager.DeselectAllSlots();
         selectedShader.SetActive(true);
         itemSelected = true;

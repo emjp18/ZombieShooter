@@ -31,7 +31,7 @@ public class Health : MonoBehaviour
         }
     }
 
-    void Heal(int health)
+    public void Heal(int health)
     {
         currentHealth += health;
         bar.SetHealth(currentHealth);

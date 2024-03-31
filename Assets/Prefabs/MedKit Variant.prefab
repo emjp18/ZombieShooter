@@ -1,0 +1,115 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &9165552539051702201
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1235007450855395282, guid: 940e9ae61564401468c90b91cf4122d3, type: 3}
+      propertyPath: m_Size.x
+      value: 0.17
+      objectReference: {fileID: 0}
+    - target: {fileID: 1235007450855395282, guid: 940e9ae61564401468c90b91cf4122d3, type: 3}
+      propertyPath: m_Size.y
+      value: 0.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 1235007450855395282, guid: 940e9ae61564401468c90b91cf4122d3, type: 3}
+      propertyPath: m_Offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1235007450855395282, guid: 940e9ae61564401468c90b91cf4122d3, type: 3}
+      propertyPath: m_Offset.y
+      value: -4.81
+      objectReference: {fileID: 0}
+    - target: {fileID: 1354226407588611315, guid: 940e9ae61564401468c90b91cf4122d3, type: 3}
+      propertyPath: m_Name
+      value: MedKit Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 1901350537547422386, guid: 940e9ae61564401468c90b91cf4122d3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 1901350537547422386, guid: 940e9ae61564401468c90b91cf4122d3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.96
+      objectReference: {fileID: 0}
+    - target: {fileID: 1901350537547422386, guid: 940e9ae61564401468c90b91cf4122d3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1901350537547422386, guid: 940e9ae61564401468c90b91cf4122d3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1901350537547422386, guid: 940e9ae61564401468c90b91cf4122d3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1901350537547422386, guid: 940e9ae61564401468c90b91cf4122d3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1901350537547422386, guid: 940e9ae61564401468c90b91cf4122d3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1901350537547422386, guid: 940e9ae61564401468c90b91cf4122d3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1901350537547422386, guid: 940e9ae61564401468c90b91cf4122d3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1901350537547422386, guid: 940e9ae61564401468c90b91cf4122d3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706021390462469651, guid: 940e9ae61564401468c90b91cf4122d3, type: 3}
+      propertyPath: itemName
+      value: MedKit
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706021390462469651, guid: 940e9ae61564401468c90b91cf4122d3, type: 3}
+      propertyPath: quantity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706021390462469651, guid: 940e9ae61564401468c90b91cf4122d3, type: 3}
+      propertyPath: itemSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5f99094e6067fa843b28ac443ccbbb7a, type: 3}
+    - target: {fileID: 3706021390462469651, guid: 940e9ae61564401468c90b91cf4122d3, type: 3}
+      propertyPath: itemDropRate
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706021390462469651, guid: 940e9ae61564401468c90b91cf4122d3, type: 3}
+      propertyPath: itemDescription
+      value: hg
+      objectReference: {fileID: 0}
+    - target: {fileID: 4439319746379164127, guid: 940e9ae61564401468c90b91cf4122d3, type: 3}
+      propertyPath: m_Size.x
+      value: 0.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 4439319746379164127, guid: 940e9ae61564401468c90b91cf4122d3, type: 3}
+      propertyPath: m_Size.y
+      value: 0.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 4439319746379164127, guid: 940e9ae61564401468c90b91cf4122d3, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5f99094e6067fa843b28ac443ccbbb7a, type: 3}
+    - target: {fileID: 4439319746379164127, guid: 940e9ae61564401468c90b91cf4122d3, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7866700987266874486, guid: 940e9ae61564401468c90b91cf4122d3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4.81
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 940e9ae61564401468c90b91cf4122d3, type: 3}
