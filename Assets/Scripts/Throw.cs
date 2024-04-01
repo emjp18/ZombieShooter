@@ -30,6 +30,7 @@ public class Throw : MonoBehaviour
         {
             ThrowItem();
         }
+        
         if (activeItemScript.inInventory)
         {
             coll.enabled = false;
@@ -44,7 +45,7 @@ public class Throw : MonoBehaviour
 
     public void ThrowItem()
     {
-        if (activeItemScript.inInventory && throwCooldownScript.canThrow)
+        if (activeItemScript.inInventory && throwCooldownScript.canThrow && !throwing)
         {
             throwing = true;
 
