@@ -155,12 +155,12 @@ public class Zombie_Flock_Prefab_Script : MonoBehaviour
                         {
                             case 0:
                                 {
-                                    animation.Play("death_01");
+                                    animation.Play("death");
                                     break;
                                 }
                             case 1:
                                 {
-                                    animation.Play("death_02");
+                                    animation.Play("death");
                                     break;
                                 }
                             default:
