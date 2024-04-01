@@ -7,6 +7,8 @@ public class InventoryManagerScript : MonoBehaviour
     public GameObject InventoryMenu;
     public ItemSlot[] itemSlot;
     private bool menuActivated;
+
+    public ItemSO[] itemSOs;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,22 +32,31 @@ public class InventoryManagerScript : MonoBehaviour
         }
 
     }
-    public int AddItem(string itemName, int itemCount, Sprite itemSprite, string itemDescription)
+
+    public void UseItem(string itemName)
+    {
+        for (int i = 0; i < itemSOs.Length; i++)
+        {
+            if (itemSOs[i].itemName == itemName)
+            {
+                itemSOs[i].UseItem();
+            }
+        }
+    }
+    public int AddItem(string itemName, int quantity, Sprite itemSprite, string itemDescription)
     {
         for (int i = 0; i < itemSlot.Length; i++)
         {
             if (itemSlot[i].isFull == false && itemSlot[i].name == name || itemSlot[i].quantity == 0)
             {
-                int leftOverItems = itemSlot[i].AddItem(itemName, itemCount, itemSprite, itemDescription);
+                int leftOverItems = itemSlot[i].AddItem(itemName, quantity, itemSprite, itemDescription);
                 if(leftOverItems > 0)
-                {
-                    leftOverItems = AddItem(itemName, leftOverItems, itemSprite, itemDescription);
-                    return leftOverItems;
-                }
                 
+                    leftOverItems = AddItem(itemName, leftOverItems, itemSprite, itemDescription);
+                    return leftOverItems;  
             }
         }
-        return itemCount;
+        return quantity;
     }
     public void DeselectAllSlots()
     {
