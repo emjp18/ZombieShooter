@@ -3,7 +3,14 @@ guid: 4162559afdfbd8e459ffb6a883dda51a
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - agentPrefab: {instanceID: 0}
+  - zombieOne: {instanceID: 0}
+  - zombieTwo: {instanceID: 0}
+  - zombieThree: {instanceID: 0}
+  - zombieFour: {instanceID: 0}
+  - player: {instanceID: 0}
+  - grid: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
