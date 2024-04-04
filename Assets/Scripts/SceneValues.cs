@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SceneValues : MonoBehaviour
+public static class SceneValues
 {
     // Start is called before the first frame update
 
@@ -11,8 +11,4 @@ public class SceneValues : MonoBehaviour
     public static int coinsForPlayer;
     //public static Transform positionBeforeBuyShop;
     public static (float x, float y, float z) positionBeforeBuyShop; 
-
-  
-
-  
 }

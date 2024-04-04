@@ -30,6 +30,8 @@ public class CheckForItem : MonoBehaviour
         {
             if (CountNumberOfItem() >= itemCount)
             {
+                PlayerPrefs.SetInt("Coins", SceneValues.coinsForPlayer);
+
                 SceneManager.LoadScene(nextLevelName);
             }
         }
