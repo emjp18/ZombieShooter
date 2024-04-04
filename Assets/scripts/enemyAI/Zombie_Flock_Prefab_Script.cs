@@ -179,7 +179,7 @@ public class Zombie_Flock_Prefab_Script : MonoBehaviour
     {
         yield return new WaitForSeconds(animation.GetCurrentAnimatorStateInfo(0).length);
 
-        Instantiate(ZombieCorpsePrefab, gameObject.transform.position+ZombieCorpsePrefab.transform.localScale, gameObject.transform.rotation).SetActive(true);
+        Instantiate(ZombieCorpsePrefab, gameObject.transform.position, gameObject.transform.rotation).SetActive(true);
 
         for (int i = 0; i < Random.Range(1, 4); i++)
         {
