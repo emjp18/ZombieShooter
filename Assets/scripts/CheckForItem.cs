@@ -33,7 +33,7 @@ public class CheckForItem : MonoBehaviour
         {
             if (CountNumberOfItem() >= itemCount)
             {
-                PlayerPrefs.SetInt("Coins", SceneValues.coinsForPlayer);
+                /*PlayerPrefs.SetInt("Coins", SceneValues.coinsForPlayer);
 
                 for (int i = 0; i < InventorySlots.transform.childCount; i++)
                 {
@@ -41,7 +41,7 @@ public class CheckForItem : MonoBehaviour
 
                     PlayerPrefs.SetString("ItemName" + i, itemSlot.itemName);
                     PlayerPrefs.SetInt("ItemQuantity" + i, itemSlot.quantity);
-                }
+                }*/
 
                 SceneManager.LoadScene(nextLevelName);
             }
