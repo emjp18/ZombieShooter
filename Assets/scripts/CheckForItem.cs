@@ -33,6 +33,7 @@ public class CheckForItem : MonoBehaviour
         {
             if (CountNumberOfItem() >= itemCount)
             {
+
                 /*PlayerPrefs.SetInt("Coins", SceneValues.coinsForPlayer);
 
                 for (int i = 0; i < InventorySlots.transform.childCount; i++)
