@@ -41,6 +41,7 @@ public class CheckForItem : MonoBehaviour
 
                     PlayerPrefs.SetString("ItemName" + i, itemSlot.itemName);
                     PlayerPrefs.SetInt("ItemQuantity" + i, itemSlot.quantity);
+                    PlayerPrefs.SetString("ItemDescription" + i, itemSlot.itemDescription);
                 }*/
 
                 SceneManager.LoadScene(nextLevelName);

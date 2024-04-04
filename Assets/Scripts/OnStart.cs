@@ -16,6 +16,7 @@ public class OnStart : MonoBehaviour
 
             itemSlot.itemName = PlayerPrefs.GetString("ItemName" + i);
             itemSlot.quantity = PlayerPrefs.GetInt("ItemQuantity" + i);
+            itemSlot.itemDescription = PlayerPrefs.GetString("ItemDescription" + i);
         }
     }
 }
