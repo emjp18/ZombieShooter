@@ -319,7 +319,6 @@ MonoBehaviour:
   healthPoints: 75
   attackRange: 1.5
   physicsKNockback: 0
-  ZombieCorpsePrefab: {fileID: 353220498162446560}
   coinPrefab: {fileID: 4312179865423899498, guid: 551d480a6256d42448e683109c4e57dd, type: 3}
 --- !u!114 &5168247168760657800
 MonoBehaviour:
