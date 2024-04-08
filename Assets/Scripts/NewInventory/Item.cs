@@ -5,20 +5,20 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
     [SerializeField]
-    private string itemName;
+    public string itemName;
 
     [SerializeField]
-    private int quantity;
+    public int quantity;
 
     [SerializeField]
-    private Sprite itemSprite;
+    public Sprite itemSprite;
 
     [SerializeField]
-    private float itemDropRate;
+    public float itemDropRate;
 
     [TextArea]
     [SerializeField]
-    private string itemDescription;
+    public string itemDescription;
 
     private InventoryManagerScript inventoryManagerScript;
 

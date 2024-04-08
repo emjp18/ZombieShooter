@@ -394,8 +394,8 @@ public class zombie_alone : MonoBehaviour
         SceneValues.coinsForPlayer += 1;
 
         Debug.Log(SceneValues.coinsForPlayer);
-        Debug.Log("Ser man detta eller?"); 
-
+        Debug.Log("Ser man detta eller?");
+        GetComponent<LootBag>().InstatiateLoot(transform.position);
         Destroy(this.gameObject);
     }
     
