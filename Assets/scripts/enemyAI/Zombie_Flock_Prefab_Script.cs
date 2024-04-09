@@ -22,7 +22,7 @@ public class Zombie_Flock_Prefab_Script : MonoBehaviour
     ParticleSystem blood;
     public bool physicsKNockback = false;
 
-    [SerializeField] private GameObject ZombieCorpsePrefab;
+    private GameObject corpseObject;
     [SerializeField] private GameObject coinPrefab;
 
     public Behavior_Tree.Root Root_AI_Node { get { return root_AI_Node; } }
@@ -72,6 +72,8 @@ public class Zombie_Flock_Prefab_Script : MonoBehaviour
         root_AI_Node.SetData("withinChaseRange", false);
         root_AI_Node.SetData("dead", false);
         root_AI_Node.SetData("withinAttackRange", false);
+
+        corpseObject = transform.GetChild(0).gameObject;
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -155,12 +157,12 @@ public class Zombie_Flock_Prefab_Script : MonoBehaviour
                         {
                             case 0:
                                 {
-                                    animation.Play("death_01");
+                                    animation.Play("death");
                                     break;
                                 }
                             case 1:
                                 {
-                                    animation.Play("death_02");
+                                    animation.Play("death");
                                     break;
                                 }
                             default:
@@ -179,7 +181,7 @@ public class Zombie_Flock_Prefab_Script : MonoBehaviour
     {
         yield return new WaitForSeconds(animation.GetCurrentAnimatorStateInfo(0).length);
 
-        Instantiate(ZombieCorpsePrefab, gameObject.transform.position+ZombieCorpsePrefab.transform.localScale, gameObject.transform.rotation).SetActive(true);
+        Instantiate(corpseObject, gameObject.transform.position, gameObject.transform.rotation).SetActive(true);
 
         for (int i = 0; i < Random.Range(1, 4); i++)
         {
