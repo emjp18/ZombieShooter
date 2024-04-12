@@ -610,9 +610,10 @@ MonoBehaviour:
   playerCrosshair: {fileID: 4010501476335754347}
   thePlayerPosition: {fileID: 0}
   camera: {fileID: 0}
-  playerAnimator: {fileID: 0}
+  playerAnimator: {fileID: 2589428789494150369}
   crosshairRectTransform: {fileID: 0}
-  playerHealthScript: {fileID: 0}
+  healthScript: {fileID: 4702323287756987466}
+  takeDamageCoolDown: 1
 --- !u!114 &4702323287756987466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -626,8 +627,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  currentHealth: 0
-  bar: {fileID: 0}
+  healthBar: {fileID: 0}
 --- !u!114 &4478028089864884188
 MonoBehaviour:
   m_ObjectHideFlags: 0

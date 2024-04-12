@@ -12,6 +12,7 @@ TagManager:
   - Grenade
   - Enviromental Hazard
   - Slowing Area
+  - Zombie
   layers:
   - Default
   - TransparentFX

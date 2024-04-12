@@ -31,6 +31,9 @@ public class CollisionMovement : MonoBehaviour
 
     private bool slowed;
 
+    [SerializeField]private float  takeDamageCoolDown;
+    private float takeDamageTimer;
+
 
     void Start()
     {
@@ -55,8 +58,6 @@ public class CollisionMovement : MonoBehaviour
         // Confine and hide cursor
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = false;
-
-
     }
 
     void Update()
@@ -92,6 +93,8 @@ public class CollisionMovement : MonoBehaviour
         }
 
         moveDirection = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0).normalized;
+
+        takeDamageTimer -= Time.deltaTime;
     }
 
     private void FixedUpdate()
@@ -105,23 +108,35 @@ public class CollisionMovement : MonoBehaviour
         playerCrosshair.position = new Vector3(mousePosition.x, mousePosition.y, 0);
     }
 
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
         GameObject collisionObject = collision.gameObject;
-        Debug.Log(collisionObject.tag);
-        Debug.Log(collisionObject.GetComponent<Zombie_Flock_Prefab_Script>().attackDamage);
-        if (collisionObject.CompareTag("zombie"))
+
+        if (takeDamageTimer <= 0)
         {
-            healthScript.TakeDamage(collisionObject.GetComponent<Zombie_Flock_Prefab_Script>().attackDamage);
+            if (collisionObject.CompareTag("Zombie"))
+            {
+                healthScript.TakeDamage(collisionObject.GetComponent<ZombieAttack>().attackDamage);
+                takeDamageTimer = takeDamageCoolDown;
+            }
         }
     }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        GameObject collisionObject = collision.gameObject;
+
+        if (takeDamageTimer <= 0)
+        {
+            if (collisionObject.CompareTag("Enviromental Hazard"))
+            {
+                healthScript.TakeDamage(collisionObject.GetComponent<DamagingSpikes>().damage);
+                takeDamageTimer = takeDamageCoolDown;
+            }
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Enviromental Hazard")
-        {
-            healthScript.TakeDamage(collision.GetComponent<DamagingSpikes>().damage);
-        }
         if (collision.tag == "Slowing Area")
         {
             slowed = true;
