@@ -7,7 +7,7 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     [SerializeField] private int maxHealth = 100;
-    [NonSerialized]  public int currentHealth;
+    private int currentHealth;
 
     private float timerForHeal = 2.5f;
 
