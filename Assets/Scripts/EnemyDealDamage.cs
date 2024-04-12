@@ -4,16 +4,14 @@ using UnityEngine;
 
 public class EnemyDealDamage : MonoBehaviour
 {
-    public int attack;
-    public Health playerHealth;
+    [SerializeField] private int damage;
+    [SerializeField] private Health playerHealth;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            playerHealth.TakeDamage(attack);
+            playerHealth.TakeDamage(damage);
         }
     }
-
-
 }

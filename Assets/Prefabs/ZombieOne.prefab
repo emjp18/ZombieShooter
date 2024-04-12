@@ -332,5 +332,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4261c619ece14a4aa15ab4154f26d13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attack: 10
-  playerHealth: {fileID: 4702323287756987466, guid: 3fe6b302c53ed7f42bfa6aef9c9b061f, type: 3}
+  damage: 10
+  playerHealth: {fileID: 0}
