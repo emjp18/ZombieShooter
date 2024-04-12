@@ -27,7 +27,7 @@ public class CollisionMovement : MonoBehaviour
     public Animator playerAnimator;
     public RectTransform crosshairRectTransform;
 
-    [SerializeField] private Health playerHealthScript;
+    [SerializeField] private Health healthScript;
 
     private bool slowed;
 
@@ -109,7 +109,7 @@ public class CollisionMovement : MonoBehaviour
     {
         if (collision.tag == "Enviromental Hazard")
         {
-            playerHealthScript.currentHealth -= collision.GetComponent<DamagingSpikes>().damage;
+            healthScript.TakeDamage(collision.GetComponent<DamagingSpikes>().damage);
         }
         if (collision.tag == "Slowing Area")
         {
