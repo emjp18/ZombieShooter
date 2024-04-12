@@ -19,6 +19,7 @@ public class Zombie_Flock_Prefab_Script : MonoBehaviour
     Behavior_Tree.Root root_AI_Node;
     Animator animation;
     public float attackRange = 3;
+    public int attackDamage;
     ParticleSystem blood;
     public bool physicsKNockback = false;
 

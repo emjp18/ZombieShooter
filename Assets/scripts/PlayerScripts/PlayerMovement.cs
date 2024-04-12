@@ -105,6 +105,17 @@ public class CollisionMovement : MonoBehaviour
         playerCrosshair.position = new Vector3(mousePosition.x, mousePosition.y, 0);
     }
 
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        GameObject collisionObject = collision.gameObject;
+        Debug.Log(collisionObject.tag);
+        Debug.Log(collisionObject.GetComponent<Zombie_Flock_Prefab_Script>().attackDamage);
+        if (collisionObject.CompareTag("zombie"))
+        {
+            healthScript.TakeDamage(collisionObject.GetComponent<Zombie_Flock_Prefab_Script>().attackDamage);
+        }
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Enviromental Hazard")
