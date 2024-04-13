@@ -29,7 +29,7 @@ public class ZombieHealth : MonoBehaviour
             for (int i = 0; i < Random.Range(1, 4); i++)
             {
                 Vector3 randomOffset = new Vector3((Random.Range(0f, 2f) - 1f) / 4, (Random.Range(0f, 2f) - 1f) / 4, 0);
-                Instantiate(coinPrefab, gameObject.transform.position + randomOffset, gameObject.transform.rotation).SetActive(true);
+                Instantiate(coinPrefab, gameObject.transform.position + randomOffset, gameObject.transform.rotation);
             }
 
             Destroy(gameObject);
