@@ -9,10 +9,6 @@ public class ZombieHealth : MonoBehaviour
     [SerializeField] private GameObject coinPrefab;
     private GameObject corpseObject;
 
-
-    float timer;
-    float timerreset = 1;
-
     void Start()
     {
         //The first child of the zombie should be its corpse
