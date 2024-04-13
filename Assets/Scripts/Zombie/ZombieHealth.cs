@@ -6,11 +6,19 @@ public class ZombieHealth : MonoBehaviour
 {
     [SerializeField] private int healthPoints;
 
+    private Rigidbody2D rigidBody;
+    private ZombieMovement zombieMovementScript;
+
     [SerializeField] private GameObject coinPrefab;
     private GameObject corpseObject;
 
+
+
     void Start()
     {
+        rigidBody = gameObject.GetComponent<Rigidbody2D>();
+        zombieMovementScript = gameObject.GetComponent<ZombieMovement>();
+
         //The first child of the zombie should be its corpse
         corpseObject = transform.GetChild(0).gameObject;
     }
@@ -45,6 +53,10 @@ public class ZombieHealth : MonoBehaviour
             int damage = collisionGameObject.GetComponent<Bullet>().damage;
 
             TakeDamage(damage);
+
+            //Makes the zombie get knockback
+            Vector2 vectorFromBullet = gameObject.transform.position- collisionGameObject.transform.position ;
+            zombieMovementScript.TakeKnockBack(vectorFromBullet.normalized);
         }
     }
 }

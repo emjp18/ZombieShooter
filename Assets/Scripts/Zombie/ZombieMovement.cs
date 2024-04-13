@@ -9,9 +9,18 @@ public class ZombieMovement : MonoBehaviour
 
     private Rigidbody2D rigidBody;
 
+    private Vector2 knockbackDirection;
+    private float knockbackTimer;//Controls for how long the zombie will take knockback
+
     void Start()
     {
         rigidBody = gameObject.GetComponent<Rigidbody2D>();
+    }
+
+    public void TakeKnockBack(Vector2 direction)
+    {
+        knockbackDirection = direction;
+        knockbackTimer = 0.07f;
     }
 
     private void FixedUpdate()
@@ -19,8 +28,17 @@ public class ZombieMovement : MonoBehaviour
         //Gets the vector that points from the zombie to the player
         Vector2 vectorToPlayer = playerTransfrom.position - gameObject.transform.position;
 
-        //Makes the zombie walk towards the player
-        rigidBody.MovePosition(rigidBody.position + vectorToPlayer.normalized * 1.5f * Time.fixedDeltaTime);
+        if (knockbackTimer <= 0)
+        {
+            //Makes the zombie walk towards the player
+            rigidBody.MovePosition(rigidBody.position + vectorToPlayer.normalized * 1.5f * Time.fixedDeltaTime);
+        }
+        else if (knockbackTimer > 0)
+        {
+            //Makes the zombie take knockback
+            rigidBody.MovePosition(rigidBody.position + knockbackDirection * Time.fixedDeltaTime);
+            knockbackTimer -= Time.fixedDeltaTime;
+        }
 
         //Makes the zombie face the player
         transform.up = vectorToPlayer;
