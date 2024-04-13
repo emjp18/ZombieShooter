@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6521815251029202212}
   - component: {fileID: 8697903120613113831}
   m_Layer: 0
-  m_Name: PoliceZombieCorpse
+  m_Name: FeralZombieCorpse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b2435648ee176cd4ba3f83882947fb54, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 10ca99e2cf2398e4298fa9137ed5fbd0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -248,6 +248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19e75f1ebcc28a646a25c5d6ab90b967, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementSpeed: 2.2
   playerTransfrom: {fileID: 0}
 --- !u!114 &7858558873014365270
 MonoBehaviour:
@@ -261,7 +262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3cc680b51c6a1a4a866b42b2887cab4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 10
+  attackDamage: 20
 --- !u!114 &8059048586429522062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,5 +275,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd273edf78726b140895358ea578f34f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthPoints: 20
+  healthPoints: 15
   coinPrefab: {fileID: 4312179865423899498, guid: 551d480a6256d42448e683109c4e57dd, type: 3}

@@ -248,6 +248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19e75f1ebcc28a646a25c5d6ab90b967, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementSpeed: 1.4
   playerTransfrom: {fileID: 0}
 --- !u!114 &7596783232606599310
 MonoBehaviour:
@@ -274,5 +275,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd273edf78726b140895358ea578f34f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthPoints: 20
+  healthPoints: 35
   coinPrefab: {fileID: 4312179865423899498, guid: 551d480a6256d42448e683109c4e57dd, type: 3}
