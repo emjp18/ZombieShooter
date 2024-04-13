@@ -5,6 +5,8 @@ using UnityEngine.EventSystems;
 
 public class ZombieMovement : MonoBehaviour
 {
+    [SerializeField] private float movementSpeed;
+
     [SerializeField] private Transform playerTransfrom;
 
     private Rigidbody2D rigidBody;
@@ -31,7 +33,7 @@ public class ZombieMovement : MonoBehaviour
         if (knockbackTimer <= 0)
         {
             //Makes the zombie walk towards the player
-            rigidBody.MovePosition(rigidBody.position + vectorToPlayer.normalized * 1.5f * Time.fixedDeltaTime);
+            rigidBody.MovePosition(rigidBody.position + vectorToPlayer.normalized * movementSpeed * Time.fixedDeltaTime);
         }
         else if (knockbackTimer > 0)
         {
