@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb9b7aa41326ab14e9ae1fc816291f66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LevelOne: LevelOne
+  LevelOne: Level_One
   StartScreen: StartScreen
   SettingsScreen: SettingsScreen
 --- !u!4 &71834712
@@ -732,7 +732,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: LevelOne
+          m_StringArgument: Level_One
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &2005481277

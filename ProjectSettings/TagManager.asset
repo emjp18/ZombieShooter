@@ -8,6 +8,11 @@ TagManager:
   - Blocking
   - bullet
   - Enemy
+  - Gun
+  - Grenade
+  - Enviromental Hazard
+  - Slowing Area
+  - Zombie
   layers:
   - Default
   - TransparentFX
@@ -17,9 +22,9 @@ TagManager:
   - UI
   - enemy
   - collision
-  - 
-  - 
-  - 
+  - Objects
+  - pathFindingEnemy
+  - Bullet
   - 
   - 
   - 

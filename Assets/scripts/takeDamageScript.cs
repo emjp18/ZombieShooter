@@ -27,7 +27,7 @@ public class takeDamageScript : MonoBehaviour
         if(collision.gameObject.tag == "bullet")
         {
             //Debug.Log("hit");
-            int damage = collision.gameObject.GetComponent<weapon_DamageScript>().damagePerHit;
+            int damage = collision.gameObject.GetComponent<Bullet>().damage;
             healthPoints -= damage;
 
             rb.AddForce((collision.transform.position - GameObject.Find("Player").transform.position).normalized * pushbackForce,ForceMode2D.Impulse);

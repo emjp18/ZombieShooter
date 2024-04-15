@@ -22,7 +22,13 @@ public class Enemy_Flocks_Script : MonoBehaviour
     float maxSpeed = 10;
     public int layerCount =6;
     public int agentCount = 5;
-    public Zombie_Flock_Prefab_Script agentPrefab;
+    public Zombie_Flock_Prefab_Script agentPreFab;// ZOMBIE ONE (BUGS IF I CHANGE THIS NAME, 
+    public Zombie_Flock_Prefab_Script zombieOne;
+    public Zombie_Flock_Prefab_Script zombieTwo;
+    public Zombie_Flock_Prefab_Script zombieThree;
+    
+
+
     public Transform player;
     public float avoidanceThreshold = 1;
     public float alignThreshold = 1;
@@ -33,19 +39,24 @@ public class Enemy_Flocks_Script : MonoBehaviour
     private void Start()
     {
         gridcellsize = grid.GetCellSize();
+
+        Zombie_Flock_Prefab_Script[] zombiePrefabs = new Zombie_Flock_Prefab_Script[] 
+        { agentPreFab, zombieOne, zombieTwo /*, zombieThree, zombieFour*/ };
+
         foreach (Transform t in spawn_points)
         {
             List<Zombie_Flock_Prefab_Script> agents = new List<Zombie_Flock_Prefab_Script>();
             for (int i = 0; i < agentCount; i++)
             {
-                agents.Add(Instantiate(agentPrefab,t.position,t.rotation));
+                // SELECT RANDOM PREFAB FROM ARRAY
+                Zombie_Flock_Prefab_Script selectedPrefab = zombiePrefabs[Random.Range(0, zombiePrefabs.Length)];
+                agents.Add(Instantiate(selectedPrefab, t.position, t.rotation));
             }
-
+            
             groups.Add(new Flock_Group_Script(t, agentCount, chaseRange, weightCohesion, weightAvoidance, weightAlignment,
-                weightStayWithinRadius, speed, avoidanceThreshold,alignThreshold,cohesionThreshold, layerCount, maxSpeed, agents, gridcellsize));
-
-           
+                weightStayWithinRadius, speed, avoidanceThreshold, alignThreshold, cohesionThreshold, layerCount, maxSpeed, agents, gridcellsize));
         }
+
 
         navigation = new AStar2D(grid);
     }

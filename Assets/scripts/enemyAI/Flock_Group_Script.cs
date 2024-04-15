@@ -10,7 +10,7 @@ using UnityEngine.Windows.Speech;
 public class Flock_Group_Script
 {
 
-   
+    bool lookingRight = true;
 
     ContactFilter2D contactFilter = new ContactFilter2D();
     ContactFilter2D contactFilterWalls = new ContactFilter2D();
@@ -29,24 +29,24 @@ public class Flock_Group_Script
     float CohesionRadius;
     List<Zombie_Flock_Prefab_Script> agents;
     int agentCount;
-    public Transform Spawn {  get { return spawn; } }
+    public Transform Spawn { get { return spawn; } }
 
     public bool allDead = false;
     Vector2 forward;
     public Flock_Group_Script(Transform spawnpoint, int agentCount,
         float chaseRange, float weightCohesion, float weightAvoidance, float weightAlignment,
-        float weightStayWithinRadius,float speed, float avoidR, float alignR, float cohesionr,int layerMask, float maxSpeed,
+        float weightStayWithinRadius, float speed, float avoidR, float alignR, float cohesionr, int layerMask, float maxSpeed,
          List<Zombie_Flock_Prefab_Script> agents, float gridcellsize)
     {
         spawn = spawnpoint;
         contactFilter.layerMask = layerMask;
         contactFilterWalls.layerMask = 7;
-        for (int i=0; i<agentCount; i++)
+        for (int i = 0; i < agentCount; i++)
         {
 
             this.agents = agents;
 
-       
+
         }
         this.gridcellsize = gridcellsize;
         weights[0] = weightAlignment;
@@ -65,7 +65,7 @@ public class Flock_Group_Script
     public void UpdateVariables(float chaseRange, float weightCohesion, float weightAvoidance, float weightAlignment,
         float weightStayWithinRadius, float speed, float avoidR, float alignR, float cohesionr)
     {
-        
+
         weights[0] = weightAlignment;
         weights[1] = weightAvoidance;
         weights[2] = weightCohesion;
@@ -82,32 +82,45 @@ public class Flock_Group_Script
         forward = Random.insideUnitCircle;// Vector2.zero;
 
 
-        for (int i=0; i<agentCount; i++)
+        for (int i = 0; i < agentCount; i++)
         {
-            if(i<agents.Count)
+            if (i < agents.Count)
             {
                 if (agents[i] == null)
                 {
                     agents.Remove(agents[i]);
                 }
             }
-            
+
         }
-       
+
 
         foreach (Zombie_Flock_Prefab_Script agent in agents)
         {
-           if(agent==null)
+            if (agent == null)
             {
-              
+
                 continue;
             }
-                
+
+
+
+            //if ((playerPos - (Vector2)agent.gameObject.transform.position).x < 0 && lookingRight)
+            //{
+            //    lookingRight = false;
+            //    agent.GetComponentInParent<SpriteRenderer>().flipX = !agent.GetComponentInParent<SpriteRenderer>().flipX;
+            //}
+
+            //if ((playerPos - (Vector2)agent.gameObject.transform.position).x > 0 && !lookingRight)
+            //{
+            //    lookingRight = false;
+            //    agent.GetComponentInParent<SpriteRenderer>().flipX = !agent.GetComponentInParent<SpriteRenderer>().flipX;
+            //}
 
 
             agent.PlayerPos = playerPos;
             agent.ChaseRange = chaseRange;
-           
+
 
             bool chasePlayer = agent.WithinChaseRangeCheck();
 
@@ -117,7 +130,7 @@ public class Flock_Group_Script
                 forward = (playerPos - (Vector2)agent.gameObject.transform.position).normalized;
                 agent.Root_AI_Node.SetData("withinChaseRange", true);
             }
-                
+
 
 
 
@@ -126,8 +139,8 @@ public class Flock_Group_Script
 
             nearbyCollider.Clear();
             agent.AgentCollider.OverlapCollider(contactFilter, nearbyCollider);
-            
-          
+
+
 
             for (int i = 0; i < 3; i++)
             {
@@ -146,7 +159,7 @@ public class Flock_Group_Script
                     nearbyCollider);
 
                 }
-                
+
 
                 partialMove *= weights[i];
 
@@ -157,7 +170,7 @@ public class Flock_Group_Script
 
 
 
-           
+
 
 
 
@@ -173,11 +186,11 @@ public class Flock_Group_Script
             {
                 move = move.normalized * maxSpeed;
             }
-       
-           
+
+
             agent.transform.position += ((Vector3)(move)) * Time.deltaTime;
 
-            if(((Vector2)agent.transform.position-playerPos).magnitude<agent.attackRange)
+            if (((Vector2)agent.transform.position - playerPos).magnitude < agent.attackRange)
             {
                 agent.Root_AI_Node.SetData("withinAttackRange", true);
             }

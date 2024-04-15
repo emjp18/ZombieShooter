@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Zombie_Flock_Prefab_Script : MonoBehaviour
@@ -11,42 +12,44 @@ public class Zombie_Flock_Prefab_Script : MonoBehaviour
     Vector2 playerPos;
     BoxCollider2D box;
     Rigidbody2D rb;
-    public float pushbackForce = 1.5f;
+    public float pushbackForce = 0.05f;
 
     public int healthPoints = 100;
     float chaseRange;
     Behavior_Tree.Root root_AI_Node;
     Animator animation;
     public float attackRange = 3;
-     ParticleSystem blood;
+    public int attackDamage;
+    ParticleSystem blood;
+    public bool physicsKNockback = false;
+
+    private GameObject corpseObject;
+    [SerializeField] private GameObject coinPrefab;
 
     public Behavior_Tree.Root Root_AI_Node { get { return root_AI_Node; } }
     public float ChaseRange { set { chaseRange = value; } }
     public Vector2 PlayerPos { set { playerPos = value; } }
     public Vector2 Direction { get { return direction; } set { direction = value; } }
     public CircleCollider2D AgentCollider { get { return agentCollider; } }
-    public Flock_Agent_Script Flock_Agent {  get { return flocking_script; } }
+    public Flock_Agent_Script Flock_Agent { get { return flocking_script; } }
+
     void Start()
     {
-        
+        var ps = GameObject.FindObjectsByType<ParticleSystem>(FindObjectsInactive.Include, FindObjectsSortMode.None);
 
-        var ps = GameObject.FindObjectsByType<ParticleSystem>(FindObjectsInactive.Include,FindObjectsSortMode.None);
-
-        foreach(ParticleSystem pas in ps)
+        foreach (ParticleSystem pas in ps)
         {
-           
-
-            if(pas.gameObject.name=="BloodSplatter")
+            if (pas.gameObject.name == "BloodSplatter")
             {
-                blood = Instantiate<ParticleSystem>(pas,this.transform);
+                blood = Instantiate<ParticleSystem>(pas, this.transform);
                 break;
             }
         }
         blood.gameObject.SetActive(true);
-    
+        blood.Stop();
 
-        animation= GetComponent<Animator>();    
-          agentCollider = GetComponent<CircleCollider2D>();
+        animation = GetComponent<Animator>();
+        agentCollider = GetComponent<CircleCollider2D>();
         box = GetComponent<BoxCollider2D>();
         rb = GetComponent<Rigidbody2D>();
         Behavior_Tree.Idle idle_AI_Node = new Behavior_Tree.Idle();
@@ -64,63 +67,69 @@ public class Zombie_Flock_Prefab_Script : MonoBehaviour
             attack_AI_Node
         };
 
-
-
         root_AI_Node = new Behavior_Tree.Root(children_AI_Nodes);
 
-   
+
         root_AI_Node.SetData("withinChaseRange", false);
         root_AI_Node.SetData("dead", false);
         root_AI_Node.SetData("withinAttackRange", false);
-   
+
+        corpseObject = transform.GetChild(0).gameObject;
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "bullet")
-        {
-            animation.SetBool("attacking", false);
-            animation.SetBool("chasing", false);
+        //if (collision.gameObject.tag == "bullet")
+        //{
+        //    animation.SetBool("attacking", false);
+        //    animation.SetBool("chasing", false);
 
-            int damage = collision.gameObject.GetComponent<weapon_DamageScript>().damagePerHit;
-            healthPoints -= damage;
-            animation.Play("hurt");
-            
-            blood.Play();
+        //    int damage = collision.gameObject.GetComponent<Bullet>().damage;
+        //    healthPoints -= damage;
+        //    animation.Play("hurt");
 
-            rb.AddForce((collision.transform.position - GameObject.Find("Player").transform.position).normalized * pushbackForce, ForceMode2D.Impulse);
-        }
+        //    blood.Play();
+
+        //    //rb.AddForce((collision.transform.position - GameObject.Find("Player").transform.position).normalized * pushbackForce, ForceMode2D.Impulse);
+
+        //}
 
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "bullet")
         {
             animation.SetBool("attacking", false);
             animation.SetBool("chasing", false);
-            
-            int damage = collision.gameObject.GetComponent<weapon_DamageScript>().damagePerHit;
+
+            int damage = collision.gameObject.GetComponent<Bullet>().damage;
             healthPoints -= damage;
             animation.Play("hurt");
             blood.Play();
-            rb.AddForce((collision.transform.position - GameObject.Find("Player").transform.position).normalized * pushbackForce, ForceMode2D.Impulse);
+            if (physicsKNockback)
+                rb.AddForce((collision.transform.position - GameObject.Find("Player").transform.position).normalized * pushbackForce, ForceMode2D.Impulse);
+            else
+                transform.position += (collision.transform.position - GameObject.Find("Player").transform.position).normalized * pushbackForce;
         }
     }
+
     public bool WithinChaseRangeCheck()
     {
 
         return ((Vector2)transform.position - playerPos).magnitude < chaseRange;
-
-
-
     }
+
     private void Update()
     {
+
+
+
         blood.transform.position = transform.position;
         root_AI_Node.SetData("dead", healthPoints <= 0);
 
         Behavior_Tree.NodeState state = root_AI_Node.Evaluate();
 
-        if(state!=Behavior_Tree.NodeState.FAILURE)
+        if (state != Behavior_Tree.NodeState.FAILURE)
         {
             switch ((Behavior_Tree.Current_Leaf_Node)root_AI_Node.GetData("currentLeafNode"))
             {
@@ -149,12 +158,12 @@ public class Zombie_Flock_Prefab_Script : MonoBehaviour
                         {
                             case 0:
                                 {
-                                    animation.Play("death_01");
+                                    animation.Play("death");
                                     break;
                                 }
                             case 1:
                                 {
-                                    animation.Play("death_02");
+                                    animation.Play("death");
                                     break;
                                 }
                             default:
@@ -167,12 +176,19 @@ public class Zombie_Flock_Prefab_Script : MonoBehaviour
                         break;
                     }
             }
-
         }
     }
     IEnumerator Dying()
     {
         yield return new WaitForSeconds(animation.GetCurrentAnimatorStateInfo(0).length);
+
+        Instantiate(corpseObject, gameObject.transform.position, gameObject.transform.rotation).SetActive(true);
+
+        for (int i = 0; i < Random.Range(1, 4); i++)
+        {
+            Vector3 randomOffset = new Vector3((Random.Range(0f, 2f) - 1f)/4, (Random.Range(0f, 2f) - 1f)/4, 0);
+            Instantiate(coinPrefab, gameObject.transform.position + randomOffset, gameObject.transform.rotation).SetActive(true);
+        }
 
         Destroy(this.gameObject);
     }
