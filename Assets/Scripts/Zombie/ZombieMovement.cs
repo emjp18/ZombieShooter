@@ -9,6 +9,10 @@ public class ZombieMovement : MonoBehaviour
 
     [SerializeField] private Transform playerTransfrom;
 
+    [SerializeField] private Animator animator;
+    [SerializeField] private bool isWalking = false;
+    [SerializeField] private bool isAttacking = false;
+
     private Rigidbody2D rigidBody;
 
     private Vector2 knockbackDirection;
@@ -27,23 +31,52 @@ public class ZombieMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //Gets the vector that points from the zombie to the player
-        Vector2 vectorToPlayer = playerTransfrom.position - gameObject.transform.position;
+        Vector2 vectorToPlayer = playerTransfrom.position - transform.position;
 
-        if (knockbackTimer <= 0)
+        if (knockbackTimer > 0)
         {
-            //Makes the zombie walk towards the player
-            rigidBody.MovePosition(rigidBody.position + vectorToPlayer.normalized * movementSpeed * Time.fixedDeltaTime);
-        }
-        else if (knockbackTimer > 0)
-        {
-            //Makes the zombie take knockback
+            // Makes the zombie take knockback
             rigidBody.MovePosition(rigidBody.position + knockbackDirection * Time.fixedDeltaTime);
             knockbackTimer -= Time.fixedDeltaTime;
+            animator.SetBool("isWalking", false); // Ensure walking is disabled during knockback
+        }
+        else
+        {
+            if (vectorToPlayer.magnitude > 0.1f)
+            {
+                // Makes the zombie walk towards the player
+                rigidBody.MovePosition(rigidBody.position + vectorToPlayer.normalized * movementSpeed * Time.fixedDeltaTime);
+                animator.SetBool("isWalking", true);
+            }
+            else
+            {
+                animator.SetBool("isWalking", false);
+            }
         }
 
-        //Makes the zombie face the player
+        // Makes the zombie face the player
         transform.up = vectorToPlayer;
+    }
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        IsAttacking(collision);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        // Optionally handle the collision impact here if needed
+    }
+
+    private void IsAttacking(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            animator.SetBool("isAttacking", true);
+        }
+        else
+        {
+            animator.SetBool("isAttacking", false);
+        }
     }
 
     /*private void OnCollisionEnter2D(Collision2D collision)
