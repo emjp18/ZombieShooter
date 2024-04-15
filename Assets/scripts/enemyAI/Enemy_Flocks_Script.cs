@@ -22,7 +22,7 @@ public class Enemy_Flocks_Script : MonoBehaviour
     float maxSpeed = 10;
     public int layerCount =6;
     public int agentCount = 5;
-    public Zombie_Flock_Prefab_Script agentPreFab; // ZOMBIE ONE (BUGS IF I CHANGE THIS NAME, 
+    public Zombie_Flock_Prefab_Script agentPreFab;// ZOMBIE ONE (BUGS IF I CHANGE THIS NAME, 
     public Zombie_Flock_Prefab_Script zombieOne;
     public Zombie_Flock_Prefab_Script zombieTwo;
     public Zombie_Flock_Prefab_Script zombieThree;
@@ -52,7 +52,7 @@ public class Enemy_Flocks_Script : MonoBehaviour
                 Zombie_Flock_Prefab_Script selectedPrefab = zombiePrefabs[Random.Range(0, zombiePrefabs.Length)];
                 agents.Add(Instantiate(selectedPrefab, t.position, t.rotation));
             }
-
+            
             groups.Add(new Flock_Group_Script(t, agentCount, chaseRange, weightCohesion, weightAvoidance, weightAlignment,
                 weightStayWithinRadius, speed, avoidanceThreshold, alignThreshold, cohesionThreshold, layerCount, maxSpeed, agents, gridcellsize));
         }

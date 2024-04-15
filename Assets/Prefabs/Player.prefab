@@ -407,7 +407,7 @@ GameObject:
   - component: {fileID: 1031854978566793262}
   - component: {fileID: 114271940408739268}
   - component: {fileID: 7934848242992679898}
-  - component: {fileID: 1747524835145562109}
+  - component: {fileID: 4303362664870068023}
   - component: {fileID: 2589428789494150369}
   - component: {fileID: 4973519283502916147}
   - component: {fileID: 911316094279096984}
@@ -521,7 +521,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!58 &1747524835145562109
+--- !u!58 &4303362664870068023
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -555,7 +555,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 1.5
 --- !u!95 &2589428789494150369
 Animator:
   serializedVersion: 5
@@ -610,9 +610,10 @@ MonoBehaviour:
   playerCrosshair: {fileID: 4010501476335754347}
   thePlayerPosition: {fileID: 0}
   camera: {fileID: 0}
-  playerAnimator: {fileID: 0}
+  playerAnimator: {fileID: 2589428789494150369}
   crosshairRectTransform: {fileID: 0}
-  playerHealthScript: {fileID: 0}
+  healthScript: {fileID: 4702323287756987466}
+  takeDamageCoolDown: 1
 --- !u!114 &4702323287756987466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -626,8 +627,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  currentHealth: 0
-  bar: {fileID: 0}
+  healthBar: {fileID: 0}
 --- !u!114 &4478028089864884188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -653,6 +653,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61352cc6d8f9cff4fb038a219b7e73a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  InventorySlots: {fileID: 0}
 --- !u!1 &1838650450743365114
 GameObject:
   m_ObjectHideFlags: 0

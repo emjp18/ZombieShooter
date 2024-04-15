@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,24 +6,24 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    float timerForHeal = 2.5f;
-    public int maxHealth = 100;
-    public int currentHealth;
+    [SerializeField] private int maxHealth = 100;
+    private int currentHealth;
 
-    public Healthbar bar;
+    private float timerForHeal = 2.5f;
+
+    public Healthbar healthBar;
     
 
     void Start()
     {
         currentHealth = maxHealth;
-        bar.SetMaxHealth(maxHealth);
+        healthBar.SetMaxHealth(maxHealth);
     }
 
-    // Update is called once per frame
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        bar.SetHealth(currentHealth);
+        healthBar.SetHealth(currentHealth);
         if (currentHealth <= 0) 
         {
             currentHealth = 0;
@@ -34,7 +35,7 @@ public class Health : MonoBehaviour
     public void Heal(int health)
     {
         currentHealth += health;
-        bar.SetHealth(currentHealth);
+        healthBar.SetHealth(currentHealth);
         if (currentHealth >= maxHealth)
         {
             currentHealth = maxHealth;
@@ -60,6 +61,4 @@ public class Health : MonoBehaviour
         }
         HealingIntervall();
     }
-
-
 }
