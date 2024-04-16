@@ -99,6 +99,7 @@ GameObject:
   - component: {fileID: 1880237937960982634}
   - component: {fileID: 7596783232606599310}
   - component: {fileID: 1876049825133197699}
+  - component: {fileID: 6593611599879614097}
   m_Layer: 0
   m_Name: PoliceZombie
   m_TagString: Zombie
@@ -249,7 +250,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 1.4
+  detectionRange: 8
   playerTransfrom: {fileID: 0}
+  animator: {fileID: 6593611599879614097}
 --- !u!114 &7596783232606599310
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,3 +280,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthPoints: 35
   coinPrefab: {fileID: 4312179865423899498, guid: 551d480a6256d42448e683109c4e57dd, type: 3}
+--- !u!95 &6593611599879614097
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6135767975756967377}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 84cd27deeae8c1244a7c8da458e504cf, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

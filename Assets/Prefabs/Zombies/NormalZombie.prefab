@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4167152847573112594}
   - component: {fileID: 1127252819763748651}
   - component: {fileID: 738811675410759120}
+  - component: {fileID: 466334024674135229}
   m_Layer: 0
   m_Name: NormalZombie
   m_TagString: Zombie
@@ -165,7 +166,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 1.5
+  detectionRange: 6
   playerTransfrom: {fileID: 0}
+  animator: {fileID: 466334024674135229}
 --- !u!114 &1127252819763748651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,6 +196,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthPoints: 25
   coinPrefab: {fileID: 4312179865423899498, guid: 551d480a6256d42448e683109c4e57dd, type: 3}
+--- !u!95 &466334024674135229
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2677751833690977007}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7041709cb9e1ebd49b7d4a023faedee3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5024400117304435922
 GameObject:
   m_ObjectHideFlags: 0
