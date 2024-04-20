@@ -10,8 +10,7 @@ public class PickUpCoin : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            SceneValues.coinsForPlayer += coinsWorth;
-            Debug.Log(SceneValues.coinsForPlayer);
+            OnStart.coins += coinsWorth;
             Destroy(gameObject);
         }
     }

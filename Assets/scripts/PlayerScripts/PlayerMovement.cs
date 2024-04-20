@@ -72,6 +72,10 @@ public class CollisionMovement : MonoBehaviour
         faceDirection = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y);
         transform.up = faceDirection;
 
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            OnStart.coins += 1;
+        }
 
         /* USED FOR SWITCHING ANIMATION STATES */
         if (moveDirection != Vector2.zero)
