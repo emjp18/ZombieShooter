@@ -72,8 +72,6 @@ public class CollisionMovement : MonoBehaviour
         faceDirection = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y);
         transform.up = faceDirection;
 
-        // GetAxis() returns a value of -1, 0 or 1 depending on button clicked, Which button does what can be seen under "input manager" in project settings
-        // Its normalized so that the speed will be consistent even if you are walking diagonaly
 
         /* USED FOR SWITCHING ANIMATION STATES */
         if (moveDirection != Vector2.zero)
@@ -92,6 +90,8 @@ public class CollisionMovement : MonoBehaviour
             currentSpeed = 0.0f;
         }
 
+        // GetAxis() returns a value of -1, 0 or 1 depending on button clicked, Which button does what can be seen under "input manager" in project settings
+        // Its normalized so that the speed will be consistent even if you are walking diagonaly
         moveDirection = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0).normalized;
 
         takeDamageTimer -= Time.deltaTime;
