@@ -6,9 +6,11 @@ public class OnStart : MonoBehaviour
 {
     [SerializeField] private GameObject InventorySlots;//Should get the parent of all the ItemSlots in the inventoryCanvas
 
+    public static int coins;
+
     void Start()
     {
-        SceneValues.coinsForPlayer = PlayerPrefs.GetInt("Coins");
+        coins = PlayerPrefs.GetInt("Coins");
 
         for (int i = 0; i < InventorySlots.transform.childCount; i++)
         {

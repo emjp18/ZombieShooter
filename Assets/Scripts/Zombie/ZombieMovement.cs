@@ -6,12 +6,13 @@ using UnityEngine.EventSystems;
 public class ZombieMovement : MonoBehaviour
 {
     [SerializeField] private float movementSpeed;
+    [SerializeField] private float detectionRange;
 
     [SerializeField] private Transform playerTransfrom;
 
     [SerializeField] private Animator animator;
-    [SerializeField] private bool isWalking = false;
-    [SerializeField] private bool isAttacking = false;
+    private bool isWalking = false;
+    private bool isAttacking = false;
 
     private Rigidbody2D rigidBody;
 
@@ -38,19 +39,26 @@ public class ZombieMovement : MonoBehaviour
             // Makes the zombie take knockback
             rigidBody.MovePosition(rigidBody.position + knockbackDirection * Time.fixedDeltaTime);
             knockbackTimer -= Time.fixedDeltaTime;
+
             animator.SetBool("isWalking", false); // Ensure walking is disabled during knockback
         }
         else
         {
-            if (vectorToPlayer.magnitude > 0.1f)
+            if (vectorToPlayer.magnitude > 0.1f && vectorToPlayer.magnitude <= detectionRange)
             {
                 // Makes the zombie walk towards the player
                 rigidBody.MovePosition(rigidBody.position + vectorToPlayer.normalized * movementSpeed * Time.fixedDeltaTime);
+
                 animator.SetBool("isWalking", true);
+                animator.SetBool("isIdle", false);
             }
-            else
+            else if (vectorToPlayer.magnitude > 0.1f)
             {
                 animator.SetBool("isWalking", false);
+            }
+            else if (vectorToPlayer.magnitude <= detectionRange)
+            {
+                animator.SetBool("isIdle", true);
             }
         }
 
@@ -78,12 +86,4 @@ public class ZombieMovement : MonoBehaviour
             animator.SetBool("isAttacking", false);
         }
     }
-
-    /*private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            rigidBody.velocity = Vector2.zero;
-        }
-    }*/
 }
