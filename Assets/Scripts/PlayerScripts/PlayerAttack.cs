@@ -39,7 +39,7 @@ public class Shooting : MonoBehaviour
     void Update()
     {
         reloadTimer += Time.deltaTime;
-        if (inventoryManagerScript.menuActivated == false)
+        if (inventoryManagerScript.menuActivated == false) //If the inventory is open, shooting is disabled
         {
             if (Input.GetMouseButton(0) && reloadTimer >= reloadTime)
             {
