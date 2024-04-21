@@ -224,7 +224,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a0d69739a3c19b4f8474d02fc805d63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  payToOpen: 1
   cost: 5
+  toNextLevel: 0
+  nextLevelName: 
+  useItemForNextLevel: 0
+  inventoryScript: {fileID: 0}
+  itemName: 
+  itemCount: 0
+  InventorySlots: {fileID: 0}
 --- !u!1 &7981741604347597182
 GameObject:
   m_ObjectHideFlags: 0
